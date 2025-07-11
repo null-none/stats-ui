@@ -1,0 +1,78 @@
+.stats-timeline {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 30px;
+  margin: 2rem auto 1rem;
+  border-bottom: 2px solid #222;
+}
+
+.stats-timeline .event {
+  position: absolute;
+  bottom: 5px;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.stats-timeline .event.good {
+  background: black;
+}
+
+.stats-timeline .event.bad {
+  background: red;
+}
+
+.stats-ticks {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  height: 20px;
+}
+
+.stats-ticks .tick {
+  position: absolute;
+  bottom: 0;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: #222;
+}
+
+
+.stats-dual {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 14px;
+}
+
+.stats-dual thead th {
+  background: none;
+  font-weight: bold;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.stats-dual td {
+  padding: 0.6rem;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+
+.stats-ual td:nth-child(2) {
+  text-align: left;
+  color: #000;
+  font-weight: 500;
+}
+
+.stats-dual tbody tr:nth-child(even) {
+  background: #f6f8fb;
+}
+
+.stats-highlight {
+  color: #002B5B;
+  font-weight: bold;
+}
+

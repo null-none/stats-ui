@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stats UI</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Rajdhani", sans-serif;
+        color: white;
+        padding: 40px;
+        font-size: 18px;
+        line-height: 1.6;
+        color: #000;
+      }
+
+      h1 {
+        font-weight: 700;
+        font-size: 32px;
+        margin-bottom: 20px;
+        color: #000;
+      }
+
+      p {
+        font-weight: 400;
+        max-width: 600px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Timeline</h1>
+    <div class="stats-timeline">
+      <div class="event good" style="left: 0%"></div>
+      <div class="event bad" style="left: 10.5%"></div>
+      <div class="event good" style="left: 21%"></div>
+      <div class="event bad" style="left: 47.5%"></div>
+      <div class="event bad" style="left: 63.1%"></div>
+    </div>
+    <div class="stats-ticks">
+      <div class="tick" style="left: 0%">0</div>
+      <div class="tick" style="left: 11%">5</div>
+      <div class="tick" style="left: 22%">10</div>
+      <div class="tick" style="left: 33%">15</div>
+      <div class="tick" style="left: 44%">20</div>
+      <div class="tick" style="left: 55%">25</div>
+      <div class="tick" style="left: 66%">30</div>
+      <div class="tick" style="left: 77%">35</div>
+      <div class="tick" style="left: 88%">40</div>
+      <div class="tick" style="left: 99%">90</div>
+    </div>
+    <hr />
+    <h1>Dual</h1>
+    <table class="stats-dual">
+      <thead>
+        <tr>
+          <th>CSKA III</th>
+          <th></th>
+          <th>Levski Sofia II</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>63</td>
+          <td>Lost balls</td>
+          <td><span class="stats-highlight">58 ★</span></td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td>Lost balls in own half</td>
+          <td><span class="stats-highlight">10 ★</span></td>
+        </tr>
+        <tr>
+          <td>46.4</td>
+          <td>Average distance to opponent's goal at possession losses, m.</td>
+          <td><span class="stats-highlight">34.4 ★</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+  </body>
+</html>
