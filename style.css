@@ -43,20 +43,18 @@
   border-collapse: collapse;
   width: 100%;
   max-width: 800px;
-  margin: 0 auto;
   font-size: 14px;
 }
 
 .stats-dual thead th {
   background: none;
+  text-align: left;
   font-weight: bold;
-  text-align: center;
   padding: 0.5rem;
 }
 
 .stats-dual td {
   padding: 0.6rem;
-  text-align: center;
   border-top: 1px solid #ddd;
 }
 
@@ -78,7 +76,7 @@
 .stats-table {
   border-collapse: collapse;
   width: 100%;
-  max-width: 700px;
+  max-width: 1600px;
   margin: 0 auto;
 }
 
