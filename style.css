@@ -142,3 +142,52 @@
   font-size: 18px;
   font-weight: bold;
 }
+
+.stats-bar-group {
+  margin-bottom: 30px;
+}
+
+.stats-bar-label {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.stats-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stats-bar-value {
+  width: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.stats-bar-bar {
+  height: 6px;
+  border-radius: 3px;
+}
+
+.stats-bar-left {
+  background: #000;
+}
+
+.stats-bar-right {
+  background: #ccc;
+}
+
+.stats-bar-wrapper {
+  flex: 1;
+  display: flex;
+}
+
+.stats-bar-left-wrapper {
+  justify-content: flex-end;
+}
+
+.stats-bar-right-wrapper {
+  justify-content: flex-start;
+}
