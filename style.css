@@ -228,12 +228,6 @@
 }
 
 .stats-pitch-label {
-  position: absolute;
-  bottom: 30px;
-  font-size: 12px;
-  background: #fff;
   color: black;
-  padding: 2px 4px;
-  border-radius: 4px;
   font-size: 18px;
 }
