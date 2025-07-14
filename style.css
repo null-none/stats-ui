@@ -191,3 +191,49 @@
 .stats-bar-right-wrapper {
   justify-content: flex-start;
 }
+
+.stats-pitch {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(5, 80px);
+  gap: 2px;
+  background: white;
+  border: 0px solid #333;
+  width: fit-content;
+}
+
+.stats-pitch-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: sans-serif;
+  position: relative;
+}
+
+.stats-pitch-green-1 {
+  background-color: #a8d08d;
+}
+.stats-pitch-green-2 {
+  background-color: #70ad47;
+}
+.stats-pitch-green-3 {
+  background-color: #548235;
+}
+.stats-pitch-red {
+  background-color: red;
+}
+.stats-pitch-orange {
+  background-color: orange;
+}
+
+.stats-pitch-label {
+  position: absolute;
+  bottom: 30px;
+  font-size: 12px;
+  background: #fff;
+  color: black;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 18px;
+}

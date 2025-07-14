@@ -156,15 +156,29 @@
     <hr />
     <h1>Bars</h1>
     <div id="bars"></div>
-
     <script src="bars.js"></script>
     <script>
-const data = `Label,TeamA,TeamB
+      const data = `Label,TeamA,TeamB
 Blocks,7,26
 Shots,12,15
 Fouls,10,8
 Possession,58,42`;
-Bars.render("bars", data);
+      Bars.render("bars", data);
+    </script>
+
+    <hr />
+    <h1>Pitch</h1>
+    <div id="pitch"></div>
+    <script src="pitch.js"></script>
+    <script>
+      const csvData = `
+      2:1,6:0,1:3
+      0:0,0:0,1:1
+      2:4,3:1,0:0
+      0:2,0:0,2:0
+      0:0,1:0,0:0
+    `;
+      Pitch.render("pitch", csvData);
     </script>
   </body>
 </html>
