@@ -2,12 +2,12 @@ const Bars = (function () {
   function parseCSV(csv) {
     const lines = csv.trim().split("\n");
     const [header, ...rows] = lines;
-    return rows.map(row => {
+    return rows.map((row) => {
       const [label, aStr, bStr] = row.split(",");
       return {
         label,
         a: Number(aStr),
-        b: Number(bStr)
+        b: Number(bStr),
       };
     });
   }
@@ -42,6 +42,6 @@ const Bars = (function () {
   }
 
   return {
-    render
+    render,
   };
 })();

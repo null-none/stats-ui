@@ -252,5 +252,20 @@ Possession,58,42`;
         defenseLabel: "Defense",
       });
     </script>
+    <hr />
+    <h1>Pie</h1>
+    <div id="stats-pie"></div>
+    <script src="pie.js"></script>
+    <script>
+      const dataPie = [
+        { label: "Team 1", value: 30, color: "#ccc" },
+        { label: "Team 2", value: 20, color: "#000" },
+      ];
+
+      Pie.render("#stats-pie", dataPie, {
+        width: 400,
+        height: 400,
+      });
+    </script>
   </body>
 </html>
