@@ -183,32 +183,74 @@ Possession,58,42`;
     `;
       Pitch.render("pitch", csvData);
     </script>
+    <hr />
     <h1>Pass Network</h1>
-  <svg id="stats-pass-network" width="800" height="500" style="border: 1px solid #ccc;"></svg>
-  <script src="pass-network.js"></script>
-  <script>
-    const formation = [
-      { id: "1", x: 50, y: 250 },
-      { id: "3", x: 150, y: 100 },
-      { id: "6", x: 150, y: 200 },
-      { id: "23", x: 150, y: 300 },
-      { id: "27", x: 150, y: 400 },
-      { id: "25", x: 250, y: 200 },
-      { id: "24", x: 250, y: 300 },
-      { id: "8", x: 350, y: 250 },
-      { id: "7", x: 350, y: 150 },
-      { id: "10", x: 350, y: 350 },
-      { id: "20", x: 450, y: 250 },
-    ];
+    <svg
+      id="stats-pass-network"
+      width="800"
+      height="500"
+      style="border: 1px solid #ccc"
+    ></svg>
+    <script src="pass-network.js"></script>
+    <script>
+      const formation = [
+        { id: "1", x: 50, y: 250 },
+        { id: "3", x: 150, y: 100 },
+        { id: "6", x: 150, y: 200 },
+        { id: "23", x: 150, y: 300 },
+        { id: "27", x: 150, y: 400 },
+        { id: "25", x: 250, y: 200 },
+        { id: "24", x: 250, y: 300 },
+        { id: "8", x: 350, y: 250 },
+        { id: "7", x: 350, y: 150 },
+        { id: "10", x: 350, y: 350 },
+        { id: "20", x: 450, y: 250 },
+      ];
 
-    const passes = [
-      { source: "8", target: "25", value: 2 },
-      { source: "8", target: "20", value: 2 },
-      { source: "8", target: "24", value: 1 },
-      { source: "8", target: "10", value: 6 },
-    ];
+      const passes = [
+        { source: "8", target: "25", value: 2 },
+        { source: "8", target: "20", value: 2 },
+        { source: "8", target: "24", value: 1 },
+        { source: "8", target: "10", value: 6 },
+      ];
 
-    passNetwork.draw("#stats-pass-network", formation, passes);
-  </script>
+      passNetwork.draw("#stats-pass-network", formation, passes);
+    </script>
+    <hr />
+    <h1>Tactical Flow</h1>
+    <svg id="tactical-flow" width="960" height="500"></svg>
+    <script src="tacticalflow.js"></script>
+    <script>
+      const dataTacticalFlow = [
+        { index: 0, attack: 10 },
+        { index: 1, defense: -30 },
+        { index: 2, attack: 20 },
+        { index: 3, attack: 45 },
+        { index: 4, defense: -40 },
+        { index: 5, attack: 25 },
+        { index: 6, defense: -50 },
+        { index: 7, attack: 75 },
+        { index: 8, attack: 32 },
+        { index: 9, defense: -35 },
+        { index: 10, defense: -25 },
+        { index: 11, attack: 60 },
+        { index: 12, attack: 48 },
+        { index: 13, defense: -55 },
+        { index: 14, attack: 90 },
+        { index: 15, defense: -65 },
+        { index: 16, attack: 18 },
+        { index: 17, attack: 22 },
+        { index: 18, defense: -42 },
+        { index: 19, attack: 38 },
+        { index: 20, defense: -38 },
+      ];
+
+      TacticalFlow.render("#tactical-flow", dataTacticalFlow, {
+        attackColor: "black",
+        defenseColor: "red",
+        attackLabel: "Attack",
+        defenseLabel: "Defense",
+      });
+    </script>
   </body>
 </html>
