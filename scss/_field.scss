@@ -1,0 +1,35 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.stats-field {
+  display: grid;
+  grid-template-columns: repeat(3, $field-cell-size);
+  grid-template-rows: repeat(4, $field-cell-size);
+  gap: 1px;
+  background: $color-bg;
+  position: relative;
+}
+
+.stats-zones {
+  border: 1px solid $color-border-solid;
+  @include flex-center;
+  position: relative;
+  font-size: $font-size-base;
+  text-align: center;
+
+  > div { z-index: 2; }
+
+  span {
+    font-weight: $font-weight-normal;
+    font-size: $font-size-sm;
+    color: $color-muted;
+  }
+
+  &.active { background: $color-bg-header; }
+
+  &.empty {
+    color: $color-black;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+  }
+}

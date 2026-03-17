@@ -1,0 +1,29 @@
+@use 'variables' as *;
+
+.stats-pass-network {
+  &-player {
+    fill: $color-white;
+    stroke: $color-red;
+    stroke-width: 2;
+  }
+
+  &-link {
+    stroke: $color-black;
+    stroke-opacity: 0.2;
+  }
+
+  &-label {
+    fill: $color-red;
+    font-size: 10px;
+    text-anchor: middle;
+  }
+}
+
+.stats-arrow {
+  position: relative;
+  margin-left: -60px;
+  font-size: 96px;
+  color: $color-muted;
+  top: -200px;
+  height: 0;
+}

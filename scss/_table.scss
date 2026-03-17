@@ -1,0 +1,61 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ─── Dual comparison table ────────────────────────────────────────────────────
+.stats-dual {
+  @include table-reset;
+  @include table-stripe;
+  max-width: $table-max-width;
+  font-size: $font-size-base;
+
+  thead th {
+    background: none;
+    text-align: left;
+    font-weight: $font-weight-bold;
+    padding: $space-2;
+  }
+
+  td {
+    padding: 0.6rem;
+    border-top: 1px solid $color-border-solid;
+
+    &:nth-child(2) {
+      text-align: left;
+      color: $color-text;
+      font-weight: $font-weight-medium;
+    }
+  }
+}
+
+.stats-highlight {
+  color: $color-accent;
+  font-weight: $font-weight-bold;
+}
+
+// ─── Player / data table ──────────────────────────────────────────────────────
+.stats-table {
+  @include table-reset;
+  @include table-stripe;
+  max-width: $table-wide-max-width;
+  margin: 0 auto;
+
+  thead th {
+    background: $color-bg-header;
+    text-align: left;
+    padding: 0.75rem;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-base;
+  }
+
+  tbody td {
+    padding: 0.6rem 0.75rem;
+    font-size: $font-size-base;
+    vertical-align: top;
+    border-top: 1px solid $color-border-light;
+  }
+
+  span {
+    font-size: $font-size-sm;
+    color: $color-muted;
+  }
+}

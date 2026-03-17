@@ -1,0 +1,12 @@
+{
+  "name": "stats-ui",
+  "version": "1.0.0",
+  "description": "Football statistics UI components",
+  "scripts": {
+    "build": "sass scss/main.scss style.css --style=compressed",
+    "watch": "sass scss/main.scss style.css --watch"
+  },
+  "devDependencies": {
+    "sass": "^1.77.0"
+  }
+}

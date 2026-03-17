@@ -1,0 +1,39 @@
+@use 'variables' as *;
+
+$event-size: 14px;
+
+.stats-timeline {
+  position: relative;
+  width: 100%;
+  max-width: $timeline-max-width;
+  height: 10px;
+  margin: 2rem auto 1rem;
+  border-bottom: 2px solid $color-text-secondary;
+
+  .event {
+    position: absolute;
+    bottom: 5px;
+    transform: translateX(-50%);
+    width: $event-size;
+    height: $event-size;
+    border-radius: 50%;
+
+    &.good { background: $color-black; }
+    &.bad  { background: $color-red; }
+  }
+}
+
+.stats-ticks {
+  position: relative;
+  max-width: $timeline-max-width;
+  margin: 0 auto;
+  height: 20px;
+
+  .tick {
+    position: absolute;
+    bottom: 0;
+    transform: translateX(-50%);
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+  }
+}

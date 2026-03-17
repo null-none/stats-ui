@@ -1,0 +1,31 @@
+@use 'variables' as *;
+
+// ─── Recent form strip ────────────────────────────────────────────────────────
+// Usage:
+// <div class="stats-form">
+//   <span class="stats-form-item stats-form-item--win">W</span>
+//   <span class="stats-form-item stats-form-item--draw">D</span>
+//   <span class="stats-form-item stats-form-item--loss">L</span>
+// </div>
+
+.stats-form {
+  display: inline-flex;
+  gap: $space-1;
+  align-items: center;
+
+  &-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    color: $color-white;
+
+    &--win  { background: $color-win; }
+    &--draw { background: $color-draw; }
+    &--loss { background: $color-loss; }
+  }
+}

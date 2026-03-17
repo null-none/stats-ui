@@ -1,0 +1,43 @@
+@use 'variables' as *;
+
+// ─── Radar / spider chart SVG styles ─────────────────────────────────────────
+.stats-radar {
+  &-grid {
+    fill: none;
+    stroke: $color-border-light;
+    stroke-width: 1;
+  }
+
+  &-axis {
+    stroke: $color-border-light;
+    stroke-width: 1;
+  }
+
+  &-area {
+    fill-opacity: 0.2;
+    stroke-width: 2;
+
+    &--a {
+      fill: $color-black;
+      stroke: $color-black;
+    }
+
+    &--b {
+      fill: $color-red;
+      stroke: $color-red;
+    }
+  }
+
+  &-label {
+    font-size: $font-size-sm;
+    fill: $color-text-secondary;
+    text-anchor: middle;
+  }
+
+  &-dot {
+    r: 4;
+
+    &--a { fill: $color-black; }
+    &--b { fill: $color-red; }
+  }
+}

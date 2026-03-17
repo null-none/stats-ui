@@ -1,0 +1,31 @@
+// ─── All @use at top ─────────────────────────────────────────────────────────
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'header';
+@use 'card';
+@use 'table';
+@use 'timeline';
+@use 'field';
+@use 'bars';
+@use 'pitch';
+@use 'pass-network';
+@use 'number';
+@use 'form';
+@use 'metric';
+@use 'radar';
+@use 'shotmap';
+@use 'pitchmap';
+@use 'arrowmap';
+@use 'xgchart';
+@use 'scatter';
+
+// ─── Base ─────────────────────────────────────────────────────────────────────
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: $font-family;
+  font-size: $font-size-lg;
+  line-height: 1.6;
+  color: $color-text;
+  background: $color-bg;
+}

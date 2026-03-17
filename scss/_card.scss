@@ -1,0 +1,28 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.stats-card {
+  @include card-base;
+  max-width: $card-max-width;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $color-border;
+    padding-bottom: $space-1;
+    margin-bottom: $space-2;
+  }
+
+  &-title {
+    @include label-upper($font-size-base, $tracking-lg, $color-text);
+  }
+
+  &-meta {
+    @include label-upper($font-size-sm, $tracking-sm, $color-text-muted);
+  }
+
+  &-body {
+    font-size: $font-size-sm;
+    margin-top: $space-1;
+  }
+}

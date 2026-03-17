@@ -1,0 +1,36 @@
+@use 'variables' as *;
+
+// Uppercase label style (used across many components)
+@mixin label-upper($size: $font-size-sm, $tracking: $tracking-md, $color: $color-text) {
+  font-size: $size;
+  text-transform: uppercase;
+  letter-spacing: $tracking;
+  color: $color;
+}
+
+// Table base reset
+@mixin table-reset {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+// Zebra striping for tables
+@mixin table-stripe($color: $color-bg-alt) {
+  tbody tr:nth-child(even) {
+    background: $color;
+  }
+}
+
+// Flex centering
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Card container
+@mixin card-base {
+  border: 1px solid $color-border;
+  border-radius: $border-radius-md;
+  padding: 10px 12px 12px;
+}

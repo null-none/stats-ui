@@ -1,0 +1,30 @@
+@use 'variables' as *;
+
+// ─── Shot map SVG styles ──────────────────────────────────────────────────────
+.stats-shotmap {
+  &-goal {
+    fill: none;
+    stroke: $color-text-secondary;
+    stroke-width: 2;
+  }
+
+  &-post {
+    fill: $color-bg-header;
+    stroke: $color-text-secondary;
+    stroke-width: 2;
+  }
+
+  &-shot {
+    stroke-width: 1.5;
+    cursor: default;
+
+    &--goal   { fill: $color-black; stroke: $color-black; }
+    &--saved  { fill: none;         stroke: $color-black; }
+    &--missed { fill: none;         stroke: $color-muted; stroke-dasharray: 3 2; }
+  }
+
+  &-legend {
+    font-size: $font-size-sm;
+    fill: $color-text-secondary;
+  }
+}

@@ -3,285 +3,872 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stats UI</title>
+    <title>Stats UI — Components</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="stylesheet" href="style.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap&subset=cyrillic"
+      href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;1,400&display=swap&subset=cyrillic"
       rel="stylesheet"
     />
     <style>
-      body {
+      /* ── Docs layout ────────────────────────────────────────────── */
+      :root {
+        --sidebar-w: 220px;
+        --content-max: 860px;
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        padding: 0;
         font-family: "Exo 2", sans-serif;
-        color: white;
-        padding: 40px;
-        font-size: 18px;
-        line-height: 1.6;
+        font-size: 15px;
         color: #000;
+        background: #fff;
       }
 
-      h1 {
+      /* ── Sidebar ────────────────────────────────────────────────── */
+      .docs-sidebar {
+        position: fixed;
+        top: 0; left: 0;
+        width: var(--sidebar-w);
+        height: 100vh;
+        overflow-y: auto;
+        border-right: 1px solid rgba(148,163,184,.22);
+        padding: 28px 0 40px;
+        background: #fafafa;
+      }
+
+      .docs-sidebar-brand {
+        padding: 0 20px 20px;
+        border-bottom: 1px solid rgba(148,163,184,.2);
+        margin-bottom: 16px;
+      }
+
+      .docs-sidebar-brand h2 {
+        margin: 0 0 2px;
+        font-size: 14px;
         font-weight: 700;
-        font-size: 32px;
-        margin-bottom: 20px;
-        color: #000;
+        text-transform: uppercase;
+        letter-spacing: .18em;
       }
 
-      p {
-        font-weight: 400;
+      .docs-sidebar-brand p {
+        margin: 0;
+        font-size: 11px;
+        color: #9ca3af;
+        text-transform: uppercase;
+        letter-spacing: .12em;
+      }
+
+      .docs-sidebar-section {
+        padding: 6px 20px 2px;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .14em;
+        color: #9ca3af;
+        margin-top: 10px;
+      }
+
+      .docs-nav {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .docs-nav a {
+        display: block;
+        padding: 6px 20px;
+        font-size: 13px;
+        color: #333;
+        text-decoration: none;
+        border-left: 2px solid transparent;
+        transition: background .12s, border-color .12s;
+      }
+
+      .docs-nav a:hover,
+      .docs-nav a.active {
+        background: rgba(0,0,0,.04);
+        border-left-color: #000;
+      }
+
+      /* ── Main content ───────────────────────────────────────────── */
+      .docs-main {
+        margin-left: var(--sidebar-w);
+        padding: 0 40px 80px;
+        max-width: calc(var(--sidebar-w) + var(--content-max));
+      }
+
+      /* ── Hero ───────────────────────────────────────────────────── */
+      .docs-hero {
+        padding: 56px 0 40px;
+        border-bottom: 1px solid rgba(148,163,184,.2);
+        margin-bottom: 0;
+      }
+
+      .docs-hero h1 {
+        margin: 0 0 8px;
+        font-size: 32px;
+        font-weight: 700;
+      }
+
+      .docs-hero p {
+        margin: 0;
+        font-size: 15px;
+        color: #555;
+        max-width: 540px;
+        line-height: 1.6;
+      }
+
+      /* ── Section ────────────────────────────────────────────────── */
+      .docs-section {
+        padding: 48px 0;
+        border-bottom: 1px solid rgba(148,163,184,.18);
+      }
+
+      .docs-section:last-child { border-bottom: none; }
+
+      .docs-section-header {
+        margin-bottom: 10px;
+      }
+
+      .docs-section-header h2 {
+        margin: 0 0 4px;
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .docs-section-header p {
+        margin: 0;
+        font-size: 13px;
+        color: #555;
+        line-height: 1.6;
         max-width: 600px;
+      }
+
+      /* ── Preview box ────────────────────────────────────────────── */
+      .docs-preview {
+        margin-top: 20px;
+        padding: 28px;
+        border: 1px solid rgba(148,163,184,.25);
+        border-radius: 8px;
+        background: #fff;
+        overflow-x: auto;
+      }
+
+      /* ── Utility rows for side-by-side items ────────────────────── */
+      .docs-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: flex-start;
+      }
+
+      /* ── Component tag badge ────────────────────────────────────── */
+      .docs-tag {
+        display: inline-block;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 600;
+        background: #f4f4f4;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        font-family: monospace;
+        color: #333;
+        margin-bottom: 10px;
       }
     </style>
   </head>
   <body>
-    <h1>Header</h1>
-    <header class="stats-header">
-      <span class="stats-header-logo">Stats UI</span>
-      <span class="stats-header-meta">Season 24/25</span>
-    </header>
-    <hr />
-    <h1>Timeline</h1>
-    <div class="stats-timeline">
-      <div class="event good" style="left: 0%"></div>
-      <div class="event bad" style="left: 10.5%"></div>
-      <div class="event good" style="left: 21%"></div>
-      <div class="event bad" style="left: 47.5%"></div>
-      <div class="event bad" style="left: 63.1%"></div>
-    </div>
-    <div class="stats-ticks">
-      <div class="tick" style="left: 0%">0</div>
-      <div class="tick" style="left: 11%">5</div>
-      <div class="tick" style="left: 22%">10</div>
-      <div class="tick" style="left: 33%">15</div>
-      <div class="tick" style="left: 44%">20</div>
-      <div class="tick" style="left: 55%">25</div>
-      <div class="tick" style="left: 66%">30</div>
-      <div class="tick" style="left: 77%">35</div>
-      <div class="tick" style="left: 88%">40</div>
-      <div class="tick" style="left: 99%">90</div>
-    </div>
-    <hr />
-    <h1>Dual</h1>
-    <table class="stats-dual">
-      <thead>
-        <tr>
-          <th>CSKA III</th>
-          <th></th>
-          <th>Levski Sofia II</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="stats-highlight">58 ★</span></td>
-          <td>Lost balls</td>
-          <td>50</td>
-        </tr>
-        <tr>
-          <td>20</td>
-          <td>Lost balls in own half</td>
-          <td><span class="stats-highlight">10 ★</span></td>
-        </tr>
-        <tr>
-          <td>46.4</td>
-          <td>Average distance to opponent's goal at possession losses, m.</td>
-          <td><span class="stats-highlight">34.4 ★</span></td>
-        </tr>
-      </tbody>
-    </table>
-    <hr />
-    <h1>Table</h1>
-    <table class="stats-table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Player</th>
-          <th>In the match</th>
-          <th>Avg. in season</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td><strong>Rumenov Emilov</strong></td>
-          <td>1 / 1<br /><span>100%</span></td>
-          <td>0.5 / 0.4<br /><span>80%</span></td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td><strong>Anatoliev Krstev</strong></td>
-          <td>3 / 2<br /><span>67%</span></td>
-          <td>1.9 / 0.9<br /><span>47%</span></td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td><strong>Marianov Mikhalev</strong></td>
-          <td>—</td>
-          <td>2.2 / 1.2<br /><span>55%</span></td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td><strong>Ivanov Dobrev</strong></td>
-          <td>—</td>
-          <td>3.6 / 2.2<br /><span>61%</span></td>
-        </tr>
-      </tbody>
-    </table>
-    <hr />
-    <h1>Card</h1>
-    <div class="stats-card">
-      <div class="stats-card-header">
-        <span class="stats-card-title">Timeline</span>
-        <span class="stats-card-meta">0–90</span>
+
+    <!-- ── Sidebar ────────────────────────────────────────────────── -->
+    <aside class="docs-sidebar">
+      <div class="docs-sidebar-brand">
+        <h2>Stats UI</h2>
+        <p>v1.0 · Components</p>
       </div>
 
-      <div class="stats-card-body">Content here...</div>
-    </div>
-    <hr />
-    <h1>Zone</h1>
-    <div class="stats-field">
-      <div class="stats-zones active">
-        <div>4/4<br /><span>100%</span></div>
-      </div>
-      <div class="stats-zones empty">–</div>
-      <div class="stats-zones empty">–</div>
-      <div class="stats-zones">
-        <div><strong>3/1</strong><br /><span>33%</span></div>
-      </div>
-      <div class="stats-zones">
-        <div><strong>2/1</strong><br /><span>50%</span></div>
-      </div>
-      <div class="stats-zones empty">–</div>
-      <div class="stats-zones">
-        <div><strong>2/2</strong><br /><span>100%</span></div>
-      </div>
-      <div class="stats-zones">
-        <div><strong>1/1</strong><br /><span>100%</span></div>
-      </div>
-      <div class="stats-zones empty">–</div>
-      <div class="stats-zones empty">–</div>
-      <div class="stats-zones">
-        <div><strong>1/1</strong><br /><span>100%</span></div>
-      </div>
-      <div class="stats-zones">
-        <div><strong>1/0</strong><br /><span>0%</span></div>
-      </div>
-      <div class="stats-zones empty">–</div>
-      <div class="stats-zones active"><div>–</div></div>
-      <div class="stats-zones empty">–</div>
-    </div>
+      <div class="docs-sidebar-section">Layout</div>
+      <ul class="docs-nav">
+        <li><a href="#header">Header</a></li>
+        <li><a href="#card">Card</a></li>
+      </ul>
 
-    <hr />
-    <h1>Bars</h1>
-    <div id="bars"></div>
+      <div class="docs-sidebar-section">Data</div>
+      <ul class="docs-nav">
+        <li><a href="#dual">Dual table</a></li>
+        <li><a href="#table">Player table</a></li>
+        <li><a href="#number">Number</a></li>
+        <li><a href="#form">Form strip</a></li>
+        <li><a href="#metric">Metric bar</a></li>
+      </ul>
+
+      <div class="docs-sidebar-section">Visualizations</div>
+      <ul class="docs-nav">
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#bars">Bars</a></li>
+        <li><a href="#pie">Pie</a></li>
+        <li><a href="#field">Field zones</a></li>
+        <li><a href="#pitch">Pitch heatmap</a></li>
+        <li><a href="#pass-network">Pass network</a></li>
+        <li><a href="#tactical-flow">Tactical flow</a></li>
+        <li><a href="#radar">Radar</a></li>
+        <li><a href="#shotmap">Shot map</a></li>
+        <li><a href="#pitchmap">Pitch map</a></li>
+        <li><a href="#arrowmap">Arrow map</a></li>
+        <li><a href="#xgchart">xG chart</a></li>
+        <li><a href="#scatter">Scatter</a></li>
+      </ul>
+    </aside>
+
+    <!-- ── Main content ───────────────────────────────────────────── -->
+    <main class="docs-main">
+
+      <header class="docs-hero">
+        <h1>Stats UI</h1>
+        <p>
+          Component library for football statistics visualization.
+          Plain HTML/CSS + D3.js. All styles compiled from SCSS.
+        </p>
+      </header>
+
+      <!-- ── Header ─────────────────────────────────────────────── -->
+      <section id="header" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Header</h2>
+          <p>Top bar with logo and match/season metadata.</p>
+        </div>
+        <span class="docs-tag">.stats-header</span>
+        <div class="docs-preview">
+          <header class="stats-header">
+            <span class="stats-header-logo">Stats UI</span>
+            <span class="stats-header-meta">Season 2024/25</span>
+          </header>
+        </div>
+      </section>
+
+      <!-- ── Card ───────────────────────────────────────────────── -->
+      <section id="card" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Card</h2>
+          <p>Container wrapper for any stat block. Has a header with title and metadata, and a body.</p>
+        </div>
+        <span class="docs-tag">.stats-card</span>
+        <div class="docs-preview">
+          <div class="stats-card">
+            <div class="stats-card-header">
+              <span class="stats-card-title">Timeline</span>
+              <span class="stats-card-meta">0–90</span>
+            </div>
+            <div class="stats-card-body">Card content here...</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Dual table ─────────────────────────────────────────── -->
+      <section id="dual" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Dual table</h2>
+          <p>Side-by-side comparison table for two teams. The leading team is marked with <code>★</code>.</p>
+        </div>
+        <span class="docs-tag">.stats-dual</span>
+        <div class="docs-preview">
+          <table class="stats-dual">
+            <thead>
+              <tr>
+                <th>CSKA III</th>
+                <th></th>
+                <th>Levski Sofia II</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="stats-highlight">58 ★</span></td>
+                <td>Ball losses</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>20</td>
+                <td>Ball losses in own half</td>
+                <td><span class="stats-highlight">10 ★</span></td>
+              </tr>
+              <tr>
+                <td>46.4</td>
+                <td>Avg. distance to opponent goal at possession loss, m.</td>
+                <td><span class="stats-highlight">34.4 ★</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── Player table ───────────────────────────────────────── -->
+      <section id="table" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Player table</h2>
+          <p>Individual player statistics table. Supports sub-values (small grey text) inside cells.</p>
+        </div>
+        <span class="docs-tag">.stats-table</span>
+        <div class="docs-preview">
+          <table class="stats-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Player</th>
+                <th>In match</th>
+                <th>Season avg.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td><strong>Rumenov Emilov</strong></td>
+                <td>1 / 1<br /><span>100%</span></td>
+                <td>0.5 / 0.4<br /><span>80%</span></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td><strong>Anatoliev Krstev</strong></td>
+                <td>3 / 2<br /><span>67%</span></td>
+                <td>1.9 / 0.9<br /><span>47%</span></td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td><strong>Marianov Mikhalev</strong></td>
+                <td>—</td>
+                <td>2.2 / 1.2<br /><span>55%</span></td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td><strong>Ivanov Dobrev</strong></td>
+                <td>—</td>
+                <td>3.6 / 2.2<br /><span>61%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── Number ─────────────────────────────────────────────── -->
+      <section id="number" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Number</h2>
+          <p>Large numeric value with a label and optional delta indicator (up / down / flat).</p>
+        </div>
+        <span class="docs-tag">.stats-number</span>
+        <div class="docs-preview">
+          <div class="docs-row">
+            <div class="stats-number">
+              <div class="stats-number-value">58</div>
+              <div class="stats-number-label">Ball losses</div>
+              <div class="stats-number-delta stats-number-delta--down">+8 vs avg</div>
+            </div>
+            <div class="stats-number">
+              <div class="stats-number-value">78%</div>
+              <div class="stats-number-label">Pass accuracy</div>
+              <div class="stats-number-delta stats-number-delta--up">+4%</div>
+            </div>
+            <div class="stats-number">
+              <div class="stats-number-value">12</div>
+              <div class="stats-number-label">Shots</div>
+              <div class="stats-number-delta stats-number-delta--flat">= avg</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Form strip ─────────────────────────────────────────── -->
+      <section id="form" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Form strip</h2>
+          <p>Recent results strip (win / draw / loss).</p>
+        </div>
+        <span class="docs-tag">.stats-form</span>
+        <div class="docs-preview">
+          <div class="docs-row" style="align-items:center; gap: 24px;">
+            <strong>CSKA III</strong>
+            <div class="stats-form">
+              <span class="stats-form-item stats-form-item--win">W</span>
+              <span class="stats-form-item stats-form-item--win">W</span>
+              <span class="stats-form-item stats-form-item--draw">D</span>
+              <span class="stats-form-item stats-form-item--loss">L</span>
+              <span class="stats-form-item stats-form-item--win">W</span>
+            </div>
+          </div>
+          <br />
+          <div class="docs-row" style="align-items:center; gap: 24px;">
+            <strong>Levski II</strong>
+            <div class="stats-form">
+              <span class="stats-form-item stats-form-item--loss">L</span>
+              <span class="stats-form-item stats-form-item--draw">D</span>
+              <span class="stats-form-item stats-form-item--loss">L</span>
+              <span class="stats-form-item stats-form-item--win">W</span>
+              <span class="stats-form-item stats-form-item--draw">D</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Metric bar ─────────────────────────────────────────── -->
+      <section id="metric" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Metric bar</h2>
+          <p>Horizontal progress bar for individual metrics. Supports color variants.</p>
+        </div>
+        <span class="docs-tag">.stats-metric</span>
+        <div class="docs-preview" style="max-width: 420px;">
+          <div class="stats-metric">
+            <div class="stats-metric-header">
+              <span class="stats-metric-label">Pass accuracy</span>
+              <span class="stats-metric-value">78%</span>
+            </div>
+            <div class="stats-metric-track">
+              <div class="stats-metric-fill" style="width: 78%"></div>
+            </div>
+          </div>
+          <div class="stats-metric stats-metric--red">
+            <div class="stats-metric-header">
+              <span class="stats-metric-label">Defensive errors</span>
+              <span class="stats-metric-value">42%</span>
+            </div>
+            <div class="stats-metric-track">
+              <div class="stats-metric-fill" style="width: 42%"></div>
+            </div>
+          </div>
+          <div class="stats-metric stats-metric--green">
+            <div class="stats-metric-header">
+              <span class="stats-metric-label">Possession</span>
+              <span class="stats-metric-value">62%</span>
+            </div>
+            <div class="stats-metric-track">
+              <div class="stats-metric-fill" style="width: 62%"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Timeline ───────────────────────────────────────────── -->
+      <section id="timeline" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Timeline</h2>
+          <p>Match timeline with event markers. Black dots are positive events (goals, key attacks), red dots are negative (losses, fouls).</p>
+        </div>
+        <span class="docs-tag">.stats-timeline</span>
+        <div class="docs-preview">
+          <div class="stats-timeline">
+            <div class="event good" style="left: 0%"></div>
+            <div class="event bad"  style="left: 10.5%"></div>
+            <div class="event good" style="left: 21%"></div>
+            <div class="event bad"  style="left: 47.5%"></div>
+            <div class="event good" style="left: 63.1%"></div>
+            <div class="event bad"  style="left: 79%"></div>
+            <div class="event good" style="left: 91%"></div>
+          </div>
+          <div class="stats-ticks">
+            <div class="tick" style="left:0%">0</div>
+            <div class="tick" style="left:11%">5</div>
+            <div class="tick" style="left:22%">10</div>
+            <div class="tick" style="left:33%">15</div>
+            <div class="tick" style="left:44%">20</div>
+            <div class="tick" style="left:55%">25</div>
+            <div class="tick" style="left:66%">30</div>
+            <div class="tick" style="left:77%">35</div>
+            <div class="tick" style="left:88%">40</div>
+            <div class="tick" style="left:99%">90</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Bars ───────────────────────────────────────────────── -->
+      <section id="bars" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Bars</h2>
+          <p>Dual comparison bars for two teams. Accepts CSV: <code>Label,TeamA,TeamB</code>.</p>
+        </div>
+        <span class="docs-tag">Bars.render(id, csvData)</span>
+        <div class="docs-preview">
+          <div id="bars-demo"></div>
+        </div>
+      </section>
+
+      <!-- ── Pie ────────────────────────────────────────────────── -->
+      <section id="pie" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Pie</h2>
+          <p>Pie chart with animation and legend. Good for possession, duel share, and similar ratios.</p>
+        </div>
+        <span class="docs-tag">Pie.render(selector, data, options)</span>
+        <div class="docs-preview">
+          <div id="pie-demo"></div>
+        </div>
+      </section>
+
+      <!-- ── Field zones ────────────────────────────────────────── -->
+      <section id="field" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Field zones</h2>
+          <p>3×4 grid of pitch zones with numeric values. Active zones are highlighted with a background.</p>
+        </div>
+        <span class="docs-tag">.stats-field / .stats-zones</span>
+        <div class="docs-preview">
+          <div class="stats-field">
+            <div class="stats-zones active"><div>4/4<br /><span>100%</span></div></div>
+            <div class="stats-zones empty">–</div>
+            <div class="stats-zones empty">–</div>
+            <div class="stats-zones"><div><strong>3/1</strong><br /><span>33%</span></div></div>
+            <div class="stats-zones"><div><strong>2/1</strong><br /><span>50%</span></div></div>
+            <div class="stats-zones empty">–</div>
+            <div class="stats-zones"><div><strong>2/2</strong><br /><span>100%</span></div></div>
+            <div class="stats-zones"><div><strong>1/1</strong><br /><span>100%</span></div></div>
+            <div class="stats-zones empty">–</div>
+            <div class="stats-zones empty">–</div>
+            <div class="stats-zones"><div><strong>1/1</strong><br /><span>100%</span></div></div>
+            <div class="stats-zones"><div><strong>1/0</strong><br /><span>0%</span></div></div>
+            <div class="stats-zones empty">–</div>
+            <div class="stats-zones active"><div>–</div></div>
+            <div class="stats-zones empty">–</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Pitch heatmap ──────────────────────────────────────── -->
+      <section id="pitch" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Pitch heatmap</h2>
+          <p>Pitch heatmap — zones are coloured by activity intensity. Accepts 4×3 CSV with <code>a:b</code> per cell.</p>
+        </div>
+        <span class="docs-tag">Pitch.render(id, csvData)</span>
+        <div class="docs-preview">
+          <b>[CSKA]</b>
+          <div id="pitch-demo"></div>
+          <b>[Opponent]</b>
+        </div>
+      </section>
+
+      <!-- ── Pass network ───────────────────────────────────────── -->
+      <section id="pass-network" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Pass network</h2>
+          <p>Team pass network on the pitch. Nodes are players, edges are passes scaled by volume.</p>
+        </div>
+        <span class="docs-tag">passNetwork.draw(selector, players, passes)</span>
+        <div class="docs-preview" style="overflow:hidden;">
+          <svg id="pass-network-demo" width="700" height="420" style="border:1px solid #eee; border-radius:4px;"></svg>
+        </div>
+      </section>
+
+      <!-- ── Tactical flow ──────────────────────────────────────── -->
+      <section id="tactical-flow" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Tactical flow</h2>
+          <p>Line chart of tactical activity — attacking and defensive actions over time.</p>
+        </div>
+        <span class="docs-tag">TacticalFlow.render(selector, data, options)</span>
+        <div class="docs-preview">
+          <svg id="tactical-flow-demo" width="780" height="380"></svg>
+        </div>
+      </section>
+
+      <!-- ── Radar ──────────────────────────────────────────────── -->
+      <section id="radar" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Radar</h2>
+          <p>Radar (spider) chart for comparing player or team attributes. Supports two datasets.</p>
+        </div>
+        <span class="docs-tag">Radar.render(selector, datasets, options)</span>
+        <div class="docs-preview">
+          <svg id="radar-demo"></svg>
+        </div>
+      </section>
+
+      <!-- ── Shot map ───────────────────────────────────────────── -->
+      <section id="shotmap" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Shot map</h2>
+          <p>Shot map on the goal frame (front view). Black filled = goal, outline = saved, dashed = missed.</p>
+        </div>
+        <span class="docs-tag">Shotmap.render(selector, shots, options)</span>
+        <div class="docs-preview">
+          <svg id="shotmap-demo"></svg>
+        </div>
+      </section>
+
+      <!-- ── Pitch map ──────────────────────────────────────────────── -->
+      <section id="pitchmap" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Pitch map</h2>
+          <p>Action dots plotted on a full pitch outline. Supports shots, tackles, interceptions, key passes, and fouls. Coordinates are 0–100 (percent of pitch length/width).</p>
+        </div>
+        <span class="docs-tag">Pitchmap.render(selector, events, options)</span>
+        <div class="docs-preview" style="overflow-x:auto;">
+          <svg id="pitchmap-demo"></svg>
+        </div>
+      </section>
+
+      <!-- ── Arrow map ──────────────────────────────────────────────── -->
+      <section id="arrowmap" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Arrow map</h2>
+          <p>Directional arrows on a full pitch — passes, runs, shots, pressing, dribbles. Arrow thickness scales with an optional <code>value</code> field. Curved arrows use a quadratic bezier with configurable offset.</p>
+        </div>
+        <span class="docs-tag">Arrowmap.render(selector, arrows, options)</span>
+        <div class="docs-preview" style="overflow-x:auto;">
+          <svg id="arrowmap-demo"></svg>
+        </div>
+      </section>
+
+      <!-- ── xG Chart ───────────────────────────────────────────────── -->
+      <section id="xgchart" class="docs-section">
+        <div class="docs-section-header">
+          <h2>xG chart</h2>
+          <p>Cumulative expected goals (xG) over match time for both teams. Each shot event is marked as a dot on the line. Dashed halftime marker at 45'.</p>
+        </div>
+        <span class="docs-tag">XgChart.render(selector, data, options)</span>
+        <div class="docs-preview">
+          <svg id="xgchart-demo"></svg>
+        </div>
+      </section>
+
+      <!-- ── Scatter ────────────────────────────────────────────────── -->
+      <section id="scatter" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Scatter</h2>
+          <p>2D scatter plot for comparing players or teams across two metrics. Supports labelled dots, color groups, custom dot sizes, and optional reference lines.</p>
+        </div>
+        <span class="docs-tag">Scatter.render(selector, data, options)</span>
+        <div class="docs-preview">
+          <svg id="scatter-demo"></svg>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ── Scripts ────────────────────────────────────────────────── -->
     <script src="bars.js"></script>
+    <script src="pitch.js"></script>
+    <script src="pass-network.js"></script>
+    <script src="pie.js"></script>
+    <script src="tacticalflow.js"></script>
+    <script src="radar.js"></script>
+    <script src="shotmap.js"></script>
+    <script src="pitchmap.js"></script>
+    <script src="arrowmap.js"></script>
+    <script src="xgchart.js"></script>
+    <script src="scatter.js"></script>
+
     <script>
-      const data = `Label,TeamA,TeamB
+      // Bars
+      Bars.render("bars-demo", `Label,TeamA,TeamB
 Blocks,7,26
 Shots,12,15
 Fouls,10,8
-Possession,58,42`;
-      Bars.render("bars", data);
-    </script>
+Possession,58,42`);
 
-    <hr />
-    <h1>Pitch</h1>
-    <b>[CSKA 1948]</b>
-    <div id="pitch"></div>
-    <b>[Levski Sofia]</b>
-    <script src="pitch.js"></script>
-    <script>
-      const csvData = `
-      2:1,6:0,1:3
-      0:0,0:0,1:1
-      2:4,3:1,0:0
-      0:2,0:0,2:0
-      0:0,1:0,0:0
-    `;
-      Pitch.render("pitch", csvData);
-    </script>
-    <hr />
-    <h1>Pass Network</h1>
-    <svg
-      id="stats-pass-network"
-      width="800"
-      height="500"
-      style="border: 1px solid #ccc"
-    ></svg>
-    <script src="pass-network.js"></script>
-    <script>
-      const formation = [
-        { id: "1", x: 50, y: 250 },
-        { id: "3", x: 150, y: 100 },
-        { id: "6", x: 150, y: 200 },
-        { id: "23", x: 150, y: 300 },
-        { id: "27", x: 150, y: 400 },
-        { id: "25", x: 250, y: 200 },
-        { id: "24", x: 250, y: 300 },
-        { id: "8", x: 350, y: 250 },
-        { id: "7", x: 350, y: 150 },
-        { id: "10", x: 350, y: 350 },
-        { id: "20", x: 450, y: 250 },
-      ];
+      // Pie
+      Pie.render("#pie-demo", [
+        { label: "Team 1", value: 58, color: "#000" },
+        { label: "Team 2", value: 42, color: "#ccc" },
+      ], { width: 320, height: 320 });
 
-      const passes = [
-        { source: "8", target: "25", value: 2 },
-        { source: "8", target: "20", value: 2 },
-        { source: "8", target: "24", value: 1 },
-        { source: "8", target: "10", value: 6 },
-      ];
+      // Pitch
+      Pitch.render("pitch-demo", `
+        2:1,6:0,1:3
+        0:0,0:0,1:1
+        2:4,3:1,0:0
+        0:2,0:0,2:0
+        0:0,1:0,0:0
+      `);
 
-      passNetwork.draw("#stats-pass-network", formation, passes);
-    </script>
-    <hr />
-    <h1>Tactical Flow</h1>
-    <svg id="tactical-flow" width="960" height="500"></svg>
-    <script src="tacticalflow.js"></script>
-    <script>
-      const dataTacticalFlow = [
-        { index: 0, attack: 10 },
-        { index: 1, defense: -30 },
-        { index: 2, attack: 20 },
-        { index: 3, attack: 45 },
-        { index: 4, defense: -40 },
-        { index: 5, attack: 25 },
-        { index: 6, defense: -50 },
-        { index: 7, attack: 75 },
-        { index: 8, attack: 32 },
-        { index: 9, defense: -35 },
+      // Pass network
+      passNetwork.draw("#pass-network-demo", [
+        { id: "1",  x: 50,  y: 210 },
+        { id: "3",  x: 140, y: 80  },
+        { id: "6",  x: 140, y: 170 },
+        { id: "23", x: 140, y: 260 },
+        { id: "27", x: 140, y: 350 },
+        { id: "25", x: 240, y: 170 },
+        { id: "24", x: 240, y: 260 },
+        { id: "8",  x: 340, y: 210 },
+        { id: "7",  x: 340, y: 110 },
+        { id: "10", x: 340, y: 310 },
+        { id: "20", x: 440, y: 210 },
+      ], [
+        { source: "8",  target: "25", value: 2 },
+        { source: "8",  target: "20", value: 2 },
+        { source: "8",  target: "24", value: 1 },
+        { source: "8",  target: "10", value: 6 },
+        { source: "25", target: "6",  value: 3 },
+        { source: "10", target: "20", value: 4 },
+      ]);
+
+      // Tactical flow
+      TacticalFlow.render("#tactical-flow-demo", [
+        { index: 0,  attack: 10 },
+        { index: 1,  defense: -30 },
+        { index: 2,  attack: 20 },
+        { index: 3,  attack: 45 },
+        { index: 4,  defense: -40 },
+        { index: 5,  attack: 25 },
+        { index: 6,  defense: -50 },
+        { index: 7,  attack: 75 },
+        { index: 8,  attack: 32 },
+        { index: 9,  defense: -35 },
         { index: 10, defense: -25 },
         { index: 11, attack: 60 },
         { index: 12, attack: 48 },
         { index: 13, defense: -55 },
         { index: 14, attack: 90 },
-        { index: 15, defense: -65 },
-        { index: 16, attack: 18 },
-        { index: 17, attack: 22 },
-        { index: 18, defense: -42 },
-        { index: 19, attack: 38 },
-        { index: 20, defense: -38 },
-      ];
-
-      TacticalFlow.render("#tactical-flow", dataTacticalFlow, {
-        attackColor: "black",
-        defenseColor: "red",
-        attackLabel: "Attack",
-        defenseLabel: "Defense",
+      ], {
+        attackColor:   "black",
+        defenseColor:  "#e11d48",
+        attackLabel:   "Attack",
+        defenseLabel:  "Defense",
       });
-    </script>
-    <hr />
-    <h1>Pie</h1>
-    <div id="stats-pie"></div>
-    <script src="pie.js"></script>
-    <script>
-      const dataPie = [
-        { label: "Team 1", value: 30, color: "#ccc" },
-        { label: "Team 2", value: 20, color: "#000" },
-      ];
 
-      Pie.render("#stats-pie", dataPie, {
-        width: 400,
-        height: 400,
+      // Radar
+      Radar.render("#radar-demo", [
+        {
+          label: "CSKA III",
+          color: "#000",
+          cls: "stats-radar-area--a",
+          values: [
+            { axis: "Shots",    value: 72 },
+            { axis: "Passing",  value: 85 },
+            { axis: "Defense",  value: 60 },
+            { axis: "Duels",    value: 78 },
+            { axis: "Pressing", value: 65 },
+            { axis: "Possession", value: 58 },
+          ],
+        },
+        {
+          label: "Levski II",
+          color: "#e11d48",
+          cls: "stats-radar-area--b",
+          values: [
+            { axis: "Shots",    value: 55 },
+            { axis: "Passing",  value: 70 },
+            { axis: "Defense",  value: 80 },
+            { axis: "Duels",    value: 62 },
+            { axis: "Pressing", value: 74 },
+            { axis: "Possession", value: 42 },
+          ],
+        },
+      ], { size: 340 });
+
+      // Shot map
+      Shotmap.render("#shotmap-demo", [
+        { x: 20,  y: 20,  result: "goal" },
+        { x: 50,  y: 50,  result: "saved" },
+        { x: 75,  y: 30,  result: "goal" },
+        { x: 35,  y: 70,  result: "missed" },
+        { x: 60,  y: 15,  result: "saved" },
+        { x: 80,  y: 80,  result: "missed" },
+        { x: 10,  y: 60,  result: "saved" },
+        { x: 45,  y: 35,  result: "goal" },
+      ], { width: 500, height: 260 });
+
+      // Pitch map
+      Pitchmap.render("#pitchmap-demo", [
+        { x: 88, y: 44, type: "shot-goal" },
+        { x: 92, y: 56, type: "shot-goal" },
+        { x: 84, y: 40, type: "shot-saved" },
+        { x: 78, y: 60, type: "shot-saved" },
+        { x: 90, y: 48, type: "shot-missed" },
+        { x: 95, y: 52, type: "shot-missed" },
+        { x: 68, y: 30, type: "key-pass" },
+        { x: 72, y: 65, type: "key-pass" },
+        { x: 55, y: 72, type: "tackle" },
+        { x: 40, y: 38, type: "tackle" },
+        { x: 48, y: 55, type: "tackle" },
+        { x: 62, y: 42, type: "interception" },
+        { x: 30, y: 60, type: "interception" },
+        { x: 74, y: 50, type: "foul" },
+        { x: 58, y: 35, type: "foul" },
+      ], { width: 700, height: 430 });
+
+      // Arrow map
+      Arrowmap.render("#arrowmap-demo", [
+        { x1: 8,  y1: 50, x2: 30, y2: 30, type: "pass",  value: 5 },
+        { x1: 30, y1: 30, x2: 52, y2: 42, type: "pass",  value: 8 },
+        { x1: 52, y1: 42, x2: 74, y2: 36, type: "pass",  value: 6 },
+        { x1: 74, y1: 36, x2: 88, y2: 48, type: "shot" },
+        { x1: 8,  y1: 50, x2: 28, y2: 68, type: "pass",  value: 4 },
+        { x1: 28, y1: 68, x2: 50, y2: 58, type: "pass",  value: 3 },
+        { x1: 50, y1: 58, x2: 70, y2: 62, type: "pass",  value: 5 },
+        { x1: 70, y1: 62, x2: 86, y2: 54, type: "shot" },
+        { x1: 42, y1: 44, x2: 55, y2: 30, type: "dribble" },
+        { x1: 35, y1: 55, x2: 50, y2: 65, type: "run" },
+        { x1: 62, y1: 35, x2: 50, y2: 28, type: "press" },
+        { x1: 68, y1: 58, x2: 55, y2: 65, type: "press" },
+      ], { width: 700, height: 430 });
+
+      // xG Chart
+      XgChart.render("#xgchart-demo", {
+        home: [
+          { minute: 12, xg: 0.08 },
+          { minute: 27, xg: 0.31 },
+          { minute: 38, xg: 0.12 },
+          { minute: 54, xg: 0.62 },
+          { minute: 61, xg: 0.09 },
+          { minute: 73, xg: 0.44 },
+          { minute: 82, xg: 0.18 },
+          { minute: 88, xg: 0.55 },
+        ],
+        away: [
+          { minute: 7,  xg: 0.14 },
+          { minute: 19, xg: 0.07 },
+          { minute: 44, xg: 0.28 },
+          { minute: 57, xg: 0.11 },
+          { minute: 66, xg: 0.52 },
+          { minute: 79, xg: 0.19 },
+          { minute: 85, xg: 0.08 },
+        ],
+      }, {
+        width: 760, height: 320,
+        homeLabel: "CSKA III",
+        awayLabel: "Levski II",
       });
+
+      // Scatter
+      Scatter.render("#scatter-demo", [
+        { x: 82, y: 0.38, label: "Rumenov",   color: "#000" },
+        { x: 76, y: 0.22, label: "Krstev",    color: "#000" },
+        { x: 89, y: 0.51, label: "Mikhalev",  color: "#000" },
+        { x: 71, y: 0.44, label: "Dobrev",    color: "#000" },
+        { x: 85, y: 0.60, label: "Petrov",    color: "#000" },
+        { x: 68, y: 0.18, label: "Georgiev",  color: "#e11d48" },
+        { x: 79, y: 0.32, label: "Ivanov",    color: "#e11d48" },
+        { x: 91, y: 0.47, label: "Stoyanov",  color: "#e11d48" },
+        { x: 73, y: 0.55, label: "Marinov",   color: "#e11d48" },
+        { x: 86, y: 0.29, label: "Kolev",     color: "#e11d48" },
+      ], {
+        width: 620, height: 400,
+        xLabel: "Pass accuracy (%)",
+        yLabel: "xG per 90",
+        refLines: [
+          { axis: "x", value: 80, label: "League avg" },
+          { axis: "y", value: 0.35, label: "League avg" },
+        ],
+      });
+
+      // Active nav highlight on scroll
+      const sections = document.querySelectorAll(".docs-section");
+      const navLinks = document.querySelectorAll(".docs-nav a");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              navLinks.forEach((a) => a.classList.remove("active"));
+              const link = document.querySelector(`.docs-nav a[href="#${e.target.id}"]`);
+              if (link) link.classList.add("active");
+            }
+          });
+        },
+        { rootMargin: "-30% 0px -60% 0px" }
+      );
+      sections.forEach((s) => observer.observe(s));
     </script>
   </body>
 </html>

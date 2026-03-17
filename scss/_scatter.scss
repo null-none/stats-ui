@@ -1,0 +1,43 @@
+@use 'variables' as *;
+
+// ─── Scatter — 2D scatter plot for player / team metrics ─────────────────────
+.stats-scatter {
+  &-dot {
+    fill-opacity: 0.85;
+    stroke-width: 1;
+    stroke-opacity: 0.4;
+  }
+
+  &-label {
+    font-size: $font-size-sm;
+    fill: $color-text-secondary;
+  }
+
+  &-grid {
+    stroke: $color-border-light;
+    stroke-width: 1;
+    stroke-dasharray: 4 3;
+  }
+
+  &-refline {
+    stroke: $color-muted;
+    stroke-width: 1;
+    stroke-dasharray: 6 3;
+  }
+
+  &-reflabel {
+    font-size: $font-size-xs;
+    fill: $color-muted;
+  }
+
+  &-axis {
+    line, path { stroke: $color-border-solid; }
+    text { font-size: $font-size-sm; fill: $color-text-secondary; }
+  }
+
+  &-axislabel {
+    font-size: $font-size-base;
+    fill: $color-text-secondary;
+    text-anchor: middle;
+  }
+}

@@ -1,0 +1,28 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.stats-pitch {
+  display: grid;
+  grid-template-columns: repeat(3, $pitch-cell-width);
+  grid-template-rows: repeat(4, $pitch-cell-height);
+  gap: 2px;
+  background: $color-bg;
+  width: fit-content;
+
+  &-zone {
+    @include flex-center;
+    color: $color-white;
+    font-family: sans-serif;
+    position: relative;
+  }
+
+  &-green-1 { background-color: $color-pitch-empty; }
+  &-green-2 { background-color: $color-pitch-green-2; }
+  &-green-3 { background-color: $color-pitch-green-3; }
+  &-red     { background-color: $color-pitch-red; }
+  &-orange  { background-color: $color-pitch-orange; }
+
+  &-label {
+    font-size: $font-size-lg;
+  }
+}

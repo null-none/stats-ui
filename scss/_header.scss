@@ -1,0 +1,19 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 18px;
+  border-bottom: 1px solid $color-border;
+  background: $color-bg;
+
+  &-logo {
+    @include label-upper($font-size-sm + 1, $tracking-md, $color-text);
+    font-weight: $font-weight-semibold;
+  }
+
+  &-meta {
+    @include label-upper($font-size-xs, $tracking-sm, $color-text-muted);
+  }
+}

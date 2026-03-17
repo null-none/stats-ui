@@ -1,0 +1,48 @@
+@use 'variables' as *;
+
+// ─── Pitchmap — action dots on a full pitch ───────────────────────────────────
+.stats-pitchmap {
+  &-bg {
+    fill: #f9fafb;
+  }
+
+  &-line {
+    stroke: #d1d5db;
+    stroke-width: 1;
+  }
+
+  &-circle {
+    fill: none;
+    stroke: #d1d5db;
+    stroke-width: 1;
+  }
+
+  &-spot {
+    fill: #d1d5db;
+  }
+
+  &-goal {
+    fill: none;
+    stroke: #9ca3af;
+    stroke-width: 1.5;
+  }
+
+  &-legend {
+    font-size: $font-size-sm;
+    fill: $color-text-secondary;
+  }
+
+  // Event dot types
+  &-event {
+    stroke-width: 1.5;
+
+    &--shot-goal    { fill: $color-black;   stroke: $color-black; }
+    &--shot-saved   { fill: none;           stroke: $color-black; }
+    &--shot-missed  { fill: none;           stroke: $color-muted; stroke-dasharray: 3 2; }
+    &--tackle       { fill: $color-accent;  stroke: $color-accent; }
+    &--interception { fill: $color-pitch-orange; stroke: $color-pitch-orange; }
+    &--key-pass     { fill: $color-win;     stroke: $color-win; }
+    &--foul         { fill: $color-red;     stroke: $color-red; }
+    &--default      { fill: $color-muted;   stroke: $color-muted; }
+  }
+}

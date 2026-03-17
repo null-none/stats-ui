@@ -1,0 +1,49 @@
+@use 'variables' as *;
+
+// ─── xG Chart — cumulative expected goals over time ──────────────────────────
+.stats-xgchart {
+  &-line {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  &-dot {
+    stroke: $color-white;
+    stroke-width: 1.5;
+  }
+
+  &-grid {
+    stroke: $color-border-light;
+    stroke-width: 1;
+    stroke-dasharray: 4 3;
+  }
+
+  &-halftime {
+    stroke: $color-border-solid;
+    stroke-width: 1;
+    stroke-dasharray: 5 4;
+  }
+
+  &-halftime-label {
+    font-size: $font-size-xs;
+    fill: $color-muted;
+  }
+
+  &-axis {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+
+    line, path { stroke: $color-border-solid; }
+    text { fill: $color-text-secondary; }
+  }
+
+  &-endlabel {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+  }
+
+  &-legend {
+    font-size: $font-size-sm;
+    fill: $color-text-secondary;
+  }
+}

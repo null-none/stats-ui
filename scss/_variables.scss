@@ -1,0 +1,82 @@
+// ─── Colors ──────────────────────────────────────────────────────────────────
+$color-black:        #000;
+$color-white:        #fff;
+$color-red:          #e11d48;
+$color-accent:       #002b5b;
+$color-muted:        #9ca3af;
+
+$color-border:       rgba(148, 163, 184, 0.25);
+$color-border-solid: #ddd;
+$color-border-light: #e0e0e0;
+
+$color-bg:           #fff;
+$color-bg-alt:       #fafafa;
+$color-bg-header:    #f4f4f4;
+
+$color-text:         #000;
+$color-text-muted:   #9ca3af;
+$color-text-secondary: #222;
+
+// Form results
+$color-win:  #16a34a;
+$color-draw: #ca8a04;
+$color-loss: #dc2626;
+
+// Pitch zone colors
+$color-pitch-empty:   #ccc;
+$color-pitch-green-2: #70ad47;
+$color-pitch-green-3: #548235;
+$color-pitch-red:     #dc2626;
+$color-pitch-orange:  #f97316;
+
+// Delta / trend
+$color-up:   #16a34a;
+$color-down: #dc2626;
+$color-flat: #9ca3af;
+
+// ─── Typography ──────────────────────────────────────────────────────────────
+$font-family: "Exo 2", sans-serif;
+
+$font-size-xs:  11px;
+$font-size-sm:  12px;
+$font-size-base: 14px;
+$font-size-md:  16px;
+$font-size-lg:  18px;
+$font-size-xl:  24px;
+$font-size-2xl: 32px;
+$font-size-3xl: 48px;
+
+$font-weight-normal:   400;
+$font-weight-medium:   500;
+$font-weight-semibold: 600;
+$font-weight-bold:     700;
+
+// ─── Spacing ─────────────────────────────────────────────────────────────────
+$space-1:  4px;
+$space-2:  8px;
+$space-3:  12px;
+$space-4:  16px;
+$space-5:  20px;
+$space-6:  24px;
+$space-8:  32px;
+$space-10: 40px;
+
+// ─── Borders ─────────────────────────────────────────────────────────────────
+$border-radius-sm:   3px;
+$border-radius-md:   6px;
+$border-radius-lg:   10px;
+$border-radius-full: 9999px;
+
+// ─── Letter spacing ──────────────────────────────────────────────────────────
+$tracking-sm: 0.12em;
+$tracking-md: 0.16em;
+$tracking-lg: 0.18em;
+
+// ─── Component dimensions ────────────────────────────────────────────────────
+$timeline-max-width:    900px;
+$table-max-width:       800px;
+$table-wide-max-width:  1600px;
+$card-max-width:        300px;
+$field-cell-size:       120px;
+$pitch-cell-width:      100px;
+$pitch-cell-height:     80px;
