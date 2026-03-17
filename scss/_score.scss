@@ -1,0 +1,62 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ─── Match score widget ───────────────────────────────────────────────────────
+// <div class="stats-score">
+//   <div class="stats-score-team">CSKA III</div>
+//   <div class="stats-score-result">
+//     <span class="stats-score-number">3</span>
+//     <span class="stats-score-sep">:</span>
+//     <span class="stats-score-number">1</span>
+//   </div>
+//   <div class="stats-score-team stats-score-team--away">Levski II</div>
+// </div>
+// <div class="stats-score-meta">FT · 17.03.2026 · Group Stage</div>
+
+.stats-score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-6;
+
+  &-team {
+    font-size: $font-size-md;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: $tracking-md;
+    flex: 1;
+    text-align: right;
+
+    &--away { text-align: left; }
+  }
+
+  &-result {
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+  }
+
+  &-number {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    line-height: 1;
+    min-width: 48px;
+    text-align: center;
+  }
+
+  &-sep {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $color-muted;
+    line-height: 1;
+  }
+
+  &-meta {
+    text-align: center;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: $tracking-sm;
+    color: $color-muted;
+    margin-top: $space-2;
+  }
+}

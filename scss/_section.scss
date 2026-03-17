@@ -1,0 +1,62 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ─── Report section header ────────────────────────────────────────────────────
+// Used to label sections within a match report or dashboard.
+//
+// <div class="stats-section">
+//   <h3 class="stats-section-title">Attacking Phase</h3>
+//   <p class="stats-section-sub">Minutes 55–90</p>
+// </div>
+
+.stats-section {
+  padding: $space-3 0 $space-2;
+  margin-bottom: $space-3;
+  border-bottom: 2px solid $color-black;
+
+  &-title {
+    margin: 0 0 2px;
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: $tracking-lg;
+    color: $color-text;
+  }
+
+  &-sub {
+    margin: 0;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: $tracking-sm;
+    color: $color-muted;
+  }
+
+  // Inline variant — title and sub on one line
+  &--inline {
+    display: flex;
+    align-items: baseline;
+    gap: $space-3;
+  }
+}
+
+// ─── Divider ─────────────────────────────────────────────────────────────────
+// <div class="stats-divider">Label</div>
+
+.stats-divider {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  margin: $space-5 0;
+  font-size: $font-size-xs;
+  text-transform: uppercase;
+  letter-spacing: $tracking-md;
+  color: $color-muted;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: $color-border-light;
+  }
+}

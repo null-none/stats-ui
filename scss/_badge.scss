@@ -1,0 +1,47 @@
+@use 'variables' as *;
+
+// ─── Position / role badge ────────────────────────────────────────────────────
+// <span class="stats-badge">GK</span>
+// <span class="stats-badge stats-badge--red">CB</span>
+// <span class="stats-badge stats-badge--accent">CM</span>
+// <span class="stats-badge stats-badge--green stats-badge--sm">FW</span>
+
+.stats-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 7px;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: $tracking-sm;
+  border-radius: $border-radius-sm;
+  background: $color-bg-header;
+  color: $color-text-secondary;
+  border: 1px solid $color-border-light;
+  white-space: nowrap;
+
+  // Color variants
+  &--black  { background: $color-black;  color: $color-white; border-color: $color-black; }
+  &--red    { background: $color-red;    color: $color-white; border-color: $color-red; }
+  &--accent { background: $color-accent; color: $color-white; border-color: $color-accent; }
+  &--green  { background: $color-win;    color: $color-white; border-color: $color-win; }
+  &--orange { background: $color-orange; color: $color-white; border-color: $color-orange; }
+
+  // Outline variants
+  &--outline-black  { background: none; color: $color-black;  border-color: $color-black; }
+  &--outline-red    { background: none; color: $color-red;    border-color: $color-red; }
+  &--outline-accent { background: none; color: $color-accent; border-color: $color-accent; }
+
+  // Size
+  &--sm {
+    font-size: 10px;
+    padding: 1px 5px;
+  }
+
+  &--lg {
+    font-size: $font-size-base;
+    padding: 4px 12px;
+    border-radius: $border-radius-md;
+  }
+}

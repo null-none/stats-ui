@@ -1,0 +1,63 @@
+@use 'variables' as *;
+
+// ─── Inline stat row ──────────────────────────────────────────────────────────
+// Single stat with label on the left and value on the right.
+// Optionally includes a subtle inline bar under the row.
+//
+// <div class="stats-stat-row">
+//   <span class="stats-stat-row-label">Pass accuracy</span>
+//   <span class="stats-stat-row-value">78%</span>
+// </div>
+//
+// With bar:
+// <div class="stats-stat-row stats-stat-row--bar" style="--pct: 78%">
+//   ...
+// </div>
+
+.stats-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: $space-2 0;
+  border-bottom: 1px solid $color-border-light;
+
+  &:last-child { border-bottom: none; }
+
+  &-label {
+    font-size: $font-size-base;
+    color: $color-text;
+  }
+
+  &-value {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    color: $color-text;
+  }
+
+  // With background bar (CSS custom property --pct sets width)
+  &--bar {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      width: var(--pct, 0%);
+      background: $color-black;
+      border-radius: $border-radius-full;
+    }
+  }
+
+  // Highlight top value
+  &--highlight .stats-stat-row-value {
+    color: $color-accent;
+  }
+}
+
+// ─── Stat row group (list wrapper) ───────────────────────────────────────────
+.stats-stat-rows {
+  width: 100%;
+  max-width: 400px;
+}

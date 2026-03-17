@@ -26,6 +26,7 @@ Output goes to `dist/`. D3.js v7 is loaded separately from CDN.
 ## Usage
 
 ```html
+<link rel="stylesheet" href="dist/tiny-grid.min.css" />
 <link rel="stylesheet" href="dist/stats-ui.css" />
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="dist/stats-ui.js"></script>
@@ -39,18 +40,28 @@ Output goes to `dist/`. D3.js v7 is loaded separately from CDN.
 ## Components
 
 ### Layout
-| Component | Description |
-|-----------|-------------|
-| `Header` | Top bar with logo and season metadata |
-| `Card` | Container with title, meta, and body |
+| Component | Class / Usage | Description |
+|-----------|---------------|-------------|
+| `Header` | `.stats-header` | Top bar with logo and season metadata |
+| `Card` | `.stats-card` | Container with title, meta, and body |
+| `Score` | `.stats-score` | Match score widget with team names and result badge |
+| `Section` | `.stats-section` | Report section header with title and subtitle |
+| `Divider` | `.stats-divider` | Horizontal rule with optional label |
 
 ### Data
-| Component | Description |
-|-----------|-------------|
-| `Number` | Large stat value with label and delta indicator |
-| `Form` | Recent results strip (W / D / L) |
-| `Metric` | Horizontal progress bar for a single metric |
-| `EventLog` | Chronological match events with icons |
+| Component | Class / Usage | Description |
+|-----------|---------------|-------------|
+| `Number` | `.stats-number` | Large stat value with label and delta indicator |
+| `Form` | `.stats-form` | Recent results strip (W / D / L) |
+| `Metric` | `.stats-metric` | Horizontal progress bar for a single metric |
+| `EventLog` | `EventLog.render(id, events, opts)` | Chronological match events with icons |
+| `Stat Row` | `.stats-stat-row` | Label + value row with optional progress underline (`--bar`) |
+
+### Badges & Players
+| Component | Class | Description |
+|-----------|-------|-------------|
+| `Badge` | `.stats-badge` | Position/role badge with color variants (`--black`, `--red`, `--accent`, `--green`, `--orange`, `--outline-*`) and size variants (`--sm`, `--lg`) |
+| `Player Card` | `.stats-player-card` | Compact player card with number, name, position badge, and stat list |
 
 ### Tables
 | Component | Description |
@@ -77,6 +88,21 @@ Output goes to `dist/`. D3.js v7 is loaded separately from CDN.
 | `Heatmap` | `Heatmap.render(sel, points, opts)` | Density heatmap on pitch |
 | `ShotQuality` | `ShotQuality.render(sel, shots, opts)` | xG bubble map on pitch |
 
+## Grid — tiny-grid
+
+`dist/tiny-grid.min.css` ships a 12-column responsive grid. Breakpoints: `sm` 600 px · `md` 900 px · `lg` 1200 px · `xl` 1800 px.
+
+```html
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">Left half</div>
+    <div class="col-md-6">Right half</div>
+  </div>
+</div>
+```
+
+Column classes follow the pattern `.col-{breakpoint}-{1…12}`. Columns stack on smaller viewports automatically.
+
 ## Structure
 
 ```
@@ -94,6 +120,7 @@ scss/
 dist/
   stats-ui.js        Bundled output (window.StatsUI)
   stats-ui.css       Compiled CSS
+  tiny-grid.min.css  12-column responsive grid
 ```
 
 ## Coordinates

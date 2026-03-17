@@ -24,6 +24,11 @@
 @use 'heatmap';
 @use 'eventlog';
 @use 'shotquality';
+@use 'score';
+@use 'badge';
+@use 'player-card';
+@use 'stat-row';
+@use 'section';
 
 // ─── Base ─────────────────────────────────────────────────────────────────────
 *, *::before, *::after { box-sizing: border-box; }

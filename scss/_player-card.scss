@@ -1,0 +1,77 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ─── Compact player card ──────────────────────────────────────────────────────
+// <div class="stats-player-card">
+//   <div class="stats-player-card-number">10</div>
+//   <div class="stats-player-card-info">
+//     <div class="stats-player-card-name">Ivanov Dobrev</div>
+//     <span class="stats-badge stats-badge--sm">CM</span>
+//   </div>
+//   <div class="stats-player-card-stats">
+//     <div class="stats-player-card-stat">
+//       <span class="stats-player-card-stat-value">85%</span>
+//       <span class="stats-player-card-stat-label">Pass</span>
+//     </div>
+//   </div>
+// </div>
+
+.stats-player-card {
+  @include card-base;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  max-width: 380px;
+
+  &-number {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $color-muted;
+    min-width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  &-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &-name {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: $space-1;
+  }
+
+  &-stats {
+    display: flex;
+    gap: $space-4;
+    flex-shrink: 0;
+  }
+
+  &-stat {
+    text-align: center;
+
+    &-value {
+      display: block;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+    }
+
+    &-label {
+      display: block;
+      font-size: $font-size-xs;
+      text-transform: uppercase;
+      letter-spacing: $tracking-sm;
+      color: $color-muted;
+    }
+  }
+
+  // Highlighted player (e.g. man of the match)
+  &--highlight {
+    border-left: 3px solid $color-black;
+  }
+}

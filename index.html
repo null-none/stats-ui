@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stats UI — Components</title>
+    <link rel="stylesheet" href="dist/tiny-grid.min.css" />
     <link rel="stylesheet" href="dist/stats-ui.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;1,400&display=swap&subset=cyrillic"
@@ -197,11 +198,21 @@
 
       <div class="docs-sidebar-section">Data</div>
       <ul class="docs-nav">
+        <li><a href="#score">Score</a></li>
+        <li><a href="#badge">Badge</a></li>
+        <li><a href="#player-card">Player card</a></li>
+        <li><a href="#stat-row">Stat row</a></li>
+        <li><a href="#section">Section</a></li>
         <li><a href="#dual">Dual table</a></li>
         <li><a href="#table">Player table</a></li>
         <li><a href="#number">Number</a></li>
         <li><a href="#form">Form strip</a></li>
         <li><a href="#metric">Metric bar</a></li>
+      </ul>
+
+      <div class="docs-sidebar-section">Grid</div>
+      <ul class="docs-nav">
+        <li><a href="#grid">tiny-grid</a></li>
       </ul>
 
       <div class="docs-sidebar-section">Visualizations</div>
@@ -267,6 +278,168 @@
               <span class="stats-card-meta">0–90</span>
             </div>
             <div class="stats-card-body">Card content here...</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Score ──────────────────────────────────────────────── -->
+      <section id="score" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Score</h2>
+          <p>Match result widget — team names, final score, and match metadata.</p>
+        </div>
+        <span class="docs-tag">.stats-score</span>
+        <div class="docs-preview">
+          <div class="stats-score">
+            <div class="stats-score-team">CSKA III</div>
+            <div class="stats-score-result">
+              <span class="stats-score-number">3</span>
+              <span class="stats-score-sep">:</span>
+              <span class="stats-score-number">1</span>
+            </div>
+            <div class="stats-score-team stats-score-team--away">Levski Sofia II</div>
+          </div>
+          <div class="stats-score-meta">FT · 17.03.2026 · Group Stage</div>
+        </div>
+      </section>
+
+      <!-- ── Badge ──────────────────────────────────────────────── -->
+      <section id="badge" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Badge</h2>
+          <p>Small labelled badge for player positions, statuses, and tags. Supports solid and outline color variants.</p>
+        </div>
+        <span class="docs-tag">.stats-badge</span>
+        <div class="docs-preview">
+          <div class="docs-row" style="gap: 8px; align-items: center; flex-wrap: wrap;">
+            <span class="stats-badge">DEF</span>
+            <span class="stats-badge stats-badge--black">GK</span>
+            <span class="stats-badge stats-badge--accent">CM</span>
+            <span class="stats-badge stats-badge--red">ST</span>
+            <span class="stats-badge stats-badge--green">CAP</span>
+            <span class="stats-badge stats-badge--orange">YC</span>
+            <span class="stats-badge stats-badge--outline-black">SUB</span>
+            <span class="stats-badge stats-badge--outline-red">RC</span>
+            <span class="stats-badge stats-badge--lg stats-badge--accent">Midfielder</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Player card ────────────────────────────────────────── -->
+      <section id="player-card" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Player card</h2>
+          <p>Compact row card for a single player — number, name, position badge, and key stats.</p>
+        </div>
+        <span class="docs-tag">.stats-player-card</span>
+        <div class="docs-preview">
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div class="stats-player-card stats-player-card--highlight">
+              <div class="stats-player-card-number">10</div>
+              <div class="stats-player-card-info">
+                <div class="stats-player-card-name">Ivanov Dobrev</div>
+                <span class="stats-badge stats-badge--sm stats-badge--accent">CM</span>
+              </div>
+              <div class="stats-player-card-stats">
+                <div class="stats-player-card-stat">
+                  <span class="stats-player-card-stat-value">89%</span>
+                  <span class="stats-player-card-stat-label">Pass</span>
+                </div>
+                <div class="stats-player-card-stat">
+                  <span class="stats-player-card-stat-value">0.51</span>
+                  <span class="stats-player-card-stat-label">xG</span>
+                </div>
+              </div>
+            </div>
+            <div class="stats-player-card">
+              <div class="stats-player-card-number">9</div>
+              <div class="stats-player-card-info">
+                <div class="stats-player-card-name">Mikhalev Marianov</div>
+                <span class="stats-badge stats-badge--sm stats-badge--red">ST</span>
+              </div>
+              <div class="stats-player-card-stats">
+                <div class="stats-player-card-stat">
+                  <span class="stats-player-card-stat-value">74%</span>
+                  <span class="stats-player-card-stat-label">Pass</span>
+                </div>
+                <div class="stats-player-card-stat">
+                  <span class="stats-player-card-stat-value">0.62</span>
+                  <span class="stats-player-card-stat-label">xG</span>
+                </div>
+              </div>
+            </div>
+            <div class="stats-player-card">
+              <div class="stats-player-card-number">3</div>
+              <div class="stats-player-card-info">
+                <div class="stats-player-card-name">Anatoliev Krstev</div>
+                <span class="stats-badge stats-badge--sm">CB</span>
+              </div>
+              <div class="stats-player-card-stats">
+                <div class="stats-player-card-stat">
+                  <span class="stats-player-card-stat-value">82%</span>
+                  <span class="stats-player-card-stat-label">Pass</span>
+                </div>
+                <div class="stats-player-card-stat">
+                  <span class="stats-player-card-stat-value">5</span>
+                  <span class="stats-player-card-stat-label">Tkl</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Stat row ───────────────────────────────────────────── -->
+      <section id="stat-row" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Stat row</h2>
+          <p>Horizontal label–value row for dense stat lists. Add <code>--bar</code> and the CSS variable <code>--pct</code> for an inline progress underline.</p>
+        </div>
+        <span class="docs-tag">.stats-stat-row</span>
+        <div class="docs-preview" style="max-width: 360px;">
+          <div class="stats-stat-rows">
+            <div class="stats-stat-row stats-stat-row--bar" style="--pct: 89%">
+              <span class="stats-stat-row-label">Pass accuracy</span>
+              <span class="stats-stat-row-value">89%</span>
+            </div>
+            <div class="stats-stat-row stats-stat-row--bar stats-stat-row--highlight" style="--pct: 100%">
+              <span class="stats-stat-row-label">Goals</span>
+              <span class="stats-stat-row-value">3</span>
+            </div>
+            <div class="stats-stat-row stats-stat-row--bar" style="--pct: 58%">
+              <span class="stats-stat-row-label">Possession</span>
+              <span class="stats-stat-row-value">58%</span>
+            </div>
+            <div class="stats-stat-row stats-stat-row--bar" style="--pct: 43%">
+              <span class="stats-stat-row-label">Duels won</span>
+              <span class="stats-stat-row-value">43%</span>
+            </div>
+            <div class="stats-stat-row">
+              <span class="stats-stat-row-label">Yellow cards</span>
+              <span class="stats-stat-row-value">1</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Section / Divider ──────────────────────────────────── -->
+      <section id="section" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Section &amp; Divider</h2>
+          <p>Report section headers and labelled dividers for structuring match reports.</p>
+        </div>
+        <span class="docs-tag">.stats-section · .stats-divider</span>
+        <div class="docs-preview">
+          <div class="stats-section">
+            <h3 class="stats-section-title">Attacking Phase</h3>
+            <p class="stats-section-sub">Minutes 55–90</p>
+          </div>
+          <p style="font-size:13px;color:#555;">Content goes here...</p>
+          <div class="stats-divider">Half time</div>
+          <p style="font-size:13px;color:#555;">Content goes here...</p>
+          <div class="stats-section stats-section--inline">
+            <h3 class="stats-section-title">Set Pieces</h3>
+            <p class="stats-section-sub">Corners &amp; Free kicks</p>
           </div>
         </div>
       </section>
@@ -704,6 +877,154 @@
         <span class="docs-tag">ShotQuality.render(selector, shots, options)</span>
         <div class="docs-preview">
           <svg id="shotquality-demo"></svg>
+        </div>
+      </section>
+
+      <!-- ── Grid ───────────────────────────────────────────────────── -->
+      <section id="grid" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Grid — tiny-grid</h2>
+          <p>
+            12-column responsive grid from <a href="https://github.com/null-none/tiny-grid" target="_blank">tiny-grid</a>.
+            Use <code>.container</code>, <code>.row</code>, and <code>.col-{breakpoint}-{n}</code> to arrange components.
+            Breakpoints: <code>sm</code> 600px · <code>md</code> 900px · <code>lg</code> 1200px · <code>xl</code> 1800px.
+          </p>
+        </div>
+        <span class="docs-tag">.container · .row · .col-md-{n}</span>
+
+        <!-- Example 1: Number cards -->
+        <div class="docs-preview">
+          <p style="font-size:12px;color:#9ca3af;margin:0 0 12px;text-transform:uppercase;letter-spacing:.12em;">col-md-3 × 4</p>
+          <div class="row">
+            <div class="col-6 col-md-3">
+              <div class="stats-number" style="max-width:none;">
+                <div class="stats-number-value">58</div>
+                <div class="stats-number-label">Ball losses</div>
+                <div class="stats-number-delta stats-number-delta--down">+8 vs avg</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="stats-number" style="max-width:none;">
+                <div class="stats-number-value">78%</div>
+                <div class="stats-number-label">Pass accuracy</div>
+                <div class="stats-number-delta stats-number-delta--up">+4%</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="stats-number" style="max-width:none;">
+                <div class="stats-number-value">12</div>
+                <div class="stats-number-label">Shots</div>
+                <div class="stats-number-delta stats-number-delta--flat">= avg</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="stats-number" style="max-width:none;">
+                <div class="stats-number-value">3</div>
+                <div class="stats-number-label">Goals</div>
+                <div class="stats-number-delta stats-number-delta--up">+2</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 2: Stat rows + Form strip side by side -->
+        <div class="docs-preview" style="margin-top:16px;">
+          <p style="font-size:12px;color:#9ca3af;margin:0 0 12px;text-transform:uppercase;letter-spacing:.12em;">col-md-8 + col-md-4</p>
+          <div class="row">
+            <div class="col-12 col-md-8">
+              <div class="stats-section">
+                <h3 class="stats-section-title">Team stats</h3>
+              </div>
+              <div class="stats-stat-rows">
+                <div class="stats-stat-row stats-stat-row--bar" style="--pct:78%">
+                  <span class="stats-stat-row-label">Pass accuracy</span>
+                  <span class="stats-stat-row-value">78%</span>
+                </div>
+                <div class="stats-stat-row stats-stat-row--bar stats-stat-row--highlight" style="--pct:100%">
+                  <span class="stats-stat-row-label">Shots on target</span>
+                  <span class="stats-stat-row-value">5 / 12</span>
+                </div>
+                <div class="stats-stat-row stats-stat-row--bar" style="--pct:58%">
+                  <span class="stats-stat-row-label">Possession</span>
+                  <span class="stats-stat-row-value">58%</span>
+                </div>
+                <div class="stats-stat-row stats-stat-row--bar" style="--pct:43%">
+                  <span class="stats-stat-row-label">Duels won</span>
+                  <span class="stats-stat-row-value">43%</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="stats-section">
+                <h3 class="stats-section-title">Form</h3>
+              </div>
+              <div style="margin-bottom:12px;">
+                <div style="font-size:12px;color:#9ca3af;margin-bottom:6px;">CSKA III</div>
+                <div class="stats-form">
+                  <span class="stats-form-item stats-form-item--win">W</span>
+                  <span class="stats-form-item stats-form-item--win">W</span>
+                  <span class="stats-form-item stats-form-item--draw">D</span>
+                  <span class="stats-form-item stats-form-item--loss">L</span>
+                  <span class="stats-form-item stats-form-item--win">W</span>
+                </div>
+              </div>
+              <div>
+                <div style="font-size:12px;color:#9ca3af;margin-bottom:6px;">Levski II</div>
+                <div class="stats-form">
+                  <span class="stats-form-item stats-form-item--loss">L</span>
+                  <span class="stats-form-item stats-form-item--draw">D</span>
+                  <span class="stats-form-item stats-form-item--loss">L</span>
+                  <span class="stats-form-item stats-form-item--win">W</span>
+                  <span class="stats-form-item stats-form-item--draw">D</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 3: Player cards grid -->
+        <div class="docs-preview" style="margin-top:16px;">
+          <p style="font-size:12px;color:#9ca3af;margin:0 0 12px;text-transform:uppercase;letter-spacing:.12em;">col-md-6 × 2</p>
+          <div class="row">
+            <div class="col-12 col-md-6" style="margin-bottom:8px;">
+              <div class="stats-player-card stats-player-card--highlight" style="max-width:none;">
+                <div class="stats-player-card-number">10</div>
+                <div class="stats-player-card-info">
+                  <div class="stats-player-card-name">Ivanov Dobrev</div>
+                  <span class="stats-badge stats-badge--sm stats-badge--accent">CM</span>
+                </div>
+                <div class="stats-player-card-stats">
+                  <div class="stats-player-card-stat">
+                    <span class="stats-player-card-stat-value">89%</span>
+                    <span class="stats-player-card-stat-label">Pass</span>
+                  </div>
+                  <div class="stats-player-card-stat">
+                    <span class="stats-player-card-stat-value">0.51</span>
+                    <span class="stats-player-card-stat-label">xG</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6" style="margin-bottom:8px;">
+              <div class="stats-player-card" style="max-width:none;">
+                <div class="stats-player-card-number">9</div>
+                <div class="stats-player-card-info">
+                  <div class="stats-player-card-name">Mikhalev Marianov</div>
+                  <span class="stats-badge stats-badge--sm stats-badge--red">ST</span>
+                </div>
+                <div class="stats-player-card-stats">
+                  <div class="stats-player-card-stat">
+                    <span class="stats-player-card-stat-value">74%</span>
+                    <span class="stats-player-card-stat-label">Pass</span>
+                  </div>
+                  <div class="stats-player-card-stat">
+                    <span class="stats-player-card-stat-value">0.62</span>
+                    <span class="stats-player-card-stat-label">xG</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
