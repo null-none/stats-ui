@@ -1,0 +1,54 @@
+@use 'variables' as *;
+
+.stats-formation {
+  &-team {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: $tracking-md;
+    fill: $color-text;
+    text-anchor: middle;
+  }
+
+  &-label {
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: $tracking-sm;
+    fill: $color-muted;
+    text-anchor: middle;
+  }
+
+  &-player {
+    fill: $color-white;
+    stroke: $color-black;
+    stroke-width: 2;
+
+    &--highlight {
+      fill: $color-black;
+      stroke: $color-white;
+    }
+
+    &--sub {
+      fill: $color-bg-header;
+      stroke: $color-muted;
+      stroke-width: 1.5;
+      stroke-dasharray: 4 3;
+    }
+  }
+
+  &-number {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    fill: $color-black;
+    text-anchor: middle;
+
+    &--highlight { fill: $color-white; }
+    &--sub       { fill: $color-muted; }
+  }
+
+  &-name {
+    font-size: 10px;
+    fill: $color-text-secondary;
+    text-anchor: middle;
+  }
+}

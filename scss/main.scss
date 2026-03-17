@@ -14,10 +14,16 @@
 @use 'metric';
 @use 'radar';
 @use 'shotmap';
+@use 'pitch-draw';
 @use 'pitchmap';
 @use 'arrowmap';
 @use 'xgchart';
 @use 'scatter';
+@use 'formation';
+@use 'momentum';
+@use 'heatmap';
+@use 'eventlog';
+@use 'shotquality';
 
 // ─── Base ─────────────────────────────────────────────────────────────────────
 *, *::before, *::after { box-sizing: border-box; }

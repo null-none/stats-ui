@@ -1,0 +1,23 @@
+// Design tokens mirroring scss/_variables.scss
+export const colors = {
+  black:      '#000',
+  white:      '#fff',
+  red:        '#e11d48',
+  accent:     '#002b5b',
+  muted:      '#9ca3af',
+  border:     '#ddd',
+  borderLight:'#e0e0e0',
+  bg:         '#fff',
+  bgAlt:      '#fafafa',
+  bgHeader:   '#f4f4f4',
+  win:        '#16a34a',
+  draw:       '#ca8a04',
+  loss:       '#dc2626',
+  pitchEmpty: '#ccc',
+  pitchGreen2:'#70ad47',
+  pitchGreen3:'#548235',
+  orange:     '#f97316',
+  up:         '#16a34a',
+  down:       '#dc2626',
+  flat:       '#9ca3af',
+};

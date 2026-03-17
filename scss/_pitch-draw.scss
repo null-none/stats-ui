@@ -1,0 +1,20 @@
+@use 'variables' as *;
+
+// Shared pitch outline styles — used by pitchmap, arrowmap, formation, heatmap, shotquality
+// Each component uses a different prefix (stats-pitchmap-*, stats-arrowmap-*, etc.)
+// This mixin is applied per-component.
+
+@mixin pitch-draw-styles($prefix) {
+  .#{$prefix}-bg     { fill: #f9fafb; }
+  .#{$prefix}-line   { stroke: #d1d5db; stroke-width: 1; fill: none; }
+  .#{$prefix}-circle { fill: none; stroke: #d1d5db; stroke-width: 1; }
+  .#{$prefix}-spot   { fill: #d1d5db; }
+  .#{$prefix}-goal   { fill: none; stroke: #9ca3af; stroke-width: 1.5; }
+}
+
+@include pitch-draw-styles('stats-pitchmap');
+@include pitch-draw-styles('stats-arrowmap');
+@include pitch-draw-styles('stats-formation-pitch');
+@include pitch-draw-styles('stats-heatmap-pitch');
+@include pitch-draw-styles('stats-heatmap-lines');
+@include pitch-draw-styles('stats-shotquality-pitch');

@@ -1,0 +1,28 @@
+@use 'variables' as *;
+
+.stats-shotquality {
+  &-dot {
+    stroke-width: 1.5;
+
+    &--goal   { fill: $color-black;   stroke: $color-black; fill-opacity: 0.85; }
+    &--saved  { fill: none;           stroke: $color-black; }
+    &--missed { fill: none;           stroke: $color-muted; stroke-dasharray: 3 2; }
+  }
+
+  &-label {
+    font-size: $font-size-xs;
+    fill: $color-text-secondary;
+    text-anchor: middle;
+  }
+
+  &-summary {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    fill: $color-text;
+  }
+
+  &-legend {
+    font-size: $font-size-sm;
+    fill: $color-text-secondary;
+  }
+}

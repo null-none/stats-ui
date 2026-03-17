@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stats UI — Components</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="dist/stats-ui.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;1,400&display=swap&subset=cyrillic"
       rel="stylesheet"
@@ -220,6 +219,11 @@
         <li><a href="#arrowmap">Arrow map</a></li>
         <li><a href="#xgchart">xG chart</a></li>
         <li><a href="#scatter">Scatter</a></li>
+        <li><a href="#formation">Formation</a></li>
+        <li><a href="#momentum">Momentum</a></li>
+        <li><a href="#heatmap">Heatmap</a></li>
+        <li><a href="#eventlog">Event log</a></li>
+        <li><a href="#shotquality">Shot quality</a></li>
       </ul>
     </aside>
 
@@ -643,22 +647,79 @@
         </div>
       </section>
 
+      <!-- ── Formation ──────────────────────────────────────────────── -->
+      <section id="formation" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Formation</h2>
+          <p>Team tactical formation on pitch. Players shown as numbered circles with optional names. Supports highlighted starters and substitutes.</p>
+        </div>
+        <span class="docs-tag">Formation.render(selector, players, options)</span>
+        <div class="docs-preview">
+          <svg id="formation-demo"></svg>
+        </div>
+      </section>
+
+      <!-- ── Momentum ────────────────────────────────────────────────── -->
+      <section id="momentum" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Momentum</h2>
+          <p>Match momentum timeline — bars above the centre line show home dominance, below show away. A smooth area curve overlays the bars for readability.</p>
+        </div>
+        <span class="docs-tag">Momentum.render(selector, data, options)</span>
+        <div class="docs-preview">
+          <svg id="momentum-demo"></svg>
+        </div>
+      </section>
+
+      <!-- ── Heatmap ─────────────────────────────────────────────────── -->
+      <section id="heatmap" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Heatmap</h2>
+          <p>Smooth density heatmap on a full pitch. Pass raw point coordinates (0–100); the component bins them into a configurable grid and applies a D3 sequential colour scale.</p>
+        </div>
+        <span class="docs-tag">Heatmap.render(selector, points, options)</span>
+        <div class="docs-preview">
+          <svg id="heatmap-demo"></svg>
+        </div>
+      </section>
+
+      <!-- ── Event log ───────────────────────────────────────────────── -->
+      <section id="eventlog" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Event log</h2>
+          <p>Chronological match event list with colour-coded icons. Home events align left, away events align right. Supports: goal, yellow card, red card, substitution, VAR, penalty.</p>
+        </div>
+        <span class="docs-tag">EventLog.render(id, events, options)</span>
+        <div class="docs-preview">
+          <div id="eventlog-demo"></div>
+        </div>
+      </section>
+
+      <!-- ── Shot quality ────────────────────────────────────────────── -->
+      <section id="shotquality" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Shot quality</h2>
+          <p>Shots on pitch as bubbles scaled by xG value. Larger bubble = higher expected goals. Filled = goal, outline = saved, dashed = missed. xG total shown below.</p>
+        </div>
+        <span class="docs-tag">ShotQuality.render(selector, shots, options)</span>
+        <div class="docs-preview">
+          <svg id="shotquality-demo"></svg>
+        </div>
+      </section>
+
     </main>
 
     <!-- ── Scripts ────────────────────────────────────────────────── -->
-    <script src="bars.js"></script>
-    <script src="pitch.js"></script>
-    <script src="pass-network.js"></script>
-    <script src="pie.js"></script>
-    <script src="tacticalflow.js"></script>
-    <script src="radar.js"></script>
-    <script src="shotmap.js"></script>
-    <script src="pitchmap.js"></script>
-    <script src="arrowmap.js"></script>
-    <script src="xgchart.js"></script>
-    <script src="scatter.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="dist/stats-ui.js"></script>
 
     <script>
+      const {
+        Bars, Pie, Pitch, PassNetwork, TacticalFlow, Radar, Shotmap,
+        Pitchmap, Arrowmap, XgChart, Scatter,
+        Formation, Momentum, Heatmap, EventLog, ShotQuality,
+      } = StatsUI;
+
       // Bars
       Bars.render("bars-demo", `Label,TeamA,TeamB
 Blocks,7,26
@@ -682,7 +743,7 @@ Possession,58,42`);
       `);
 
       // Pass network
-      passNetwork.draw("#pass-network-demo", [
+      PassNetwork.draw("#pass-network-demo", [
         { id: "1",  x: 50,  y: 210 },
         { id: "3",  x: 140, y: 80  },
         { id: "6",  x: 140, y: 170 },
@@ -705,98 +766,59 @@ Possession,58,42`);
 
       // Tactical flow
       TacticalFlow.render("#tactical-flow-demo", [
-        { index: 0,  attack: 10 },
-        { index: 1,  defense: -30 },
-        { index: 2,  attack: 20 },
-        { index: 3,  attack: 45 },
-        { index: 4,  defense: -40 },
-        { index: 5,  attack: 25 },
-        { index: 6,  defense: -50 },
-        { index: 7,  attack: 75 },
-        { index: 8,  attack: 32 },
-        { index: 9,  defense: -35 },
-        { index: 10, defense: -25 },
-        { index: 11, attack: 60 },
-        { index: 12, attack: 48 },
-        { index: 13, defense: -55 },
+        { index: 0,  attack: 10 },   { index: 1,  defense: -30 },
+        { index: 2,  attack: 20 },   { index: 3,  attack: 45 },
+        { index: 4,  defense: -40 }, { index: 5,  attack: 25 },
+        { index: 6,  defense: -50 }, { index: 7,  attack: 75 },
+        { index: 8,  attack: 32 },   { index: 9,  defense: -35 },
+        { index: 10, defense: -25 }, { index: 11, attack: 60 },
+        { index: 12, attack: 48 },   { index: 13, defense: -55 },
         { index: 14, attack: 90 },
-      ], {
-        attackColor:   "black",
-        defenseColor:  "#e11d48",
-        attackLabel:   "Attack",
-        defenseLabel:  "Defense",
-      });
+      ], { attackColor: "black", defenseColor: "#e11d48", attackLabel: "Attack", defenseLabel: "Defense" });
 
       // Radar
       Radar.render("#radar-demo", [
-        {
-          label: "CSKA III",
-          color: "#000",
-          cls: "stats-radar-area--a",
-          values: [
-            { axis: "Shots",    value: 72 },
-            { axis: "Passing",  value: 85 },
-            { axis: "Defense",  value: 60 },
-            { axis: "Duels",    value: 78 },
-            { axis: "Pressing", value: 65 },
-            { axis: "Possession", value: 58 },
-          ],
-        },
-        {
-          label: "Levski II",
-          color: "#e11d48",
-          cls: "stats-radar-area--b",
-          values: [
-            { axis: "Shots",    value: 55 },
-            { axis: "Passing",  value: 70 },
-            { axis: "Defense",  value: 80 },
-            { axis: "Duels",    value: 62 },
-            { axis: "Pressing", value: 74 },
-            { axis: "Possession", value: 42 },
-          ],
-        },
+        { label: "CSKA III", color: "#000", cls: "stats-radar-area--a", values: [
+            { axis: "Shots", value: 72 }, { axis: "Passing",    value: 85 },
+            { axis: "Defense", value: 60 }, { axis: "Duels",   value: 78 },
+            { axis: "Pressing", value: 65 }, { axis: "Possession", value: 58 },
+        ]},
+        { label: "Levski II", color: "#e11d48", cls: "stats-radar-area--b", values: [
+            { axis: "Shots", value: 55 }, { axis: "Passing",    value: 70 },
+            { axis: "Defense", value: 80 }, { axis: "Duels",   value: 62 },
+            { axis: "Pressing", value: 74 }, { axis: "Possession", value: 42 },
+        ]},
       ], { size: 340 });
 
       // Shot map
       Shotmap.render("#shotmap-demo", [
-        { x: 20,  y: 20,  result: "goal" },
-        { x: 50,  y: 50,  result: "saved" },
-        { x: 75,  y: 30,  result: "goal" },
-        { x: 35,  y: 70,  result: "missed" },
-        { x: 60,  y: 15,  result: "saved" },
-        { x: 80,  y: 80,  result: "missed" },
-        { x: 10,  y: 60,  result: "saved" },
-        { x: 45,  y: 35,  result: "goal" },
+        { x: 20, y: 20, result: "goal" },   { x: 50, y: 50, result: "saved" },
+        { x: 75, y: 30, result: "goal" },   { x: 35, y: 70, result: "missed" },
+        { x: 60, y: 15, result: "saved" },  { x: 80, y: 80, result: "missed" },
+        { x: 10, y: 60, result: "saved" },  { x: 45, y: 35, result: "goal" },
       ], { width: 500, height: 260 });
 
       // Pitch map
       Pitchmap.render("#pitchmap-demo", [
-        { x: 88, y: 44, type: "shot-goal" },
-        { x: 92, y: 56, type: "shot-goal" },
-        { x: 84, y: 40, type: "shot-saved" },
-        { x: 78, y: 60, type: "shot-saved" },
-        { x: 90, y: 48, type: "shot-missed" },
-        { x: 95, y: 52, type: "shot-missed" },
-        { x: 68, y: 30, type: "key-pass" },
-        { x: 72, y: 65, type: "key-pass" },
-        { x: 55, y: 72, type: "tackle" },
-        { x: 40, y: 38, type: "tackle" },
-        { x: 48, y: 55, type: "tackle" },
-        { x: 62, y: 42, type: "interception" },
-        { x: 30, y: 60, type: "interception" },
-        { x: 74, y: 50, type: "foul" },
+        { x: 88, y: 44, type: "shot-goal" },   { x: 92, y: 56, type: "shot-goal" },
+        { x: 84, y: 40, type: "shot-saved" },  { x: 78, y: 60, type: "shot-saved" },
+        { x: 90, y: 48, type: "shot-missed" }, { x: 95, y: 52, type: "shot-missed" },
+        { x: 68, y: 30, type: "key-pass" },    { x: 72, y: 65, type: "key-pass" },
+        { x: 55, y: 72, type: "tackle" },      { x: 40, y: 38, type: "tackle" },
+        { x: 48, y: 55, type: "tackle" },      { x: 62, y: 42, type: "interception" },
+        { x: 30, y: 60, type: "interception" },{ x: 74, y: 50, type: "foul" },
         { x: 58, y: 35, type: "foul" },
       ], { width: 700, height: 430 });
 
       // Arrow map
       Arrowmap.render("#arrowmap-demo", [
-        { x1: 8,  y1: 50, x2: 30, y2: 30, type: "pass",  value: 5 },
-        { x1: 30, y1: 30, x2: 52, y2: 42, type: "pass",  value: 8 },
-        { x1: 52, y1: 42, x2: 74, y2: 36, type: "pass",  value: 6 },
+        { x1: 8,  y1: 50, x2: 30, y2: 30, type: "pass",    value: 5 },
+        { x1: 30, y1: 30, x2: 52, y2: 42, type: "pass",    value: 8 },
+        { x1: 52, y1: 42, x2: 74, y2: 36, type: "pass",    value: 6 },
         { x1: 74, y1: 36, x2: 88, y2: 48, type: "shot" },
-        { x1: 8,  y1: 50, x2: 28, y2: 68, type: "pass",  value: 4 },
-        { x1: 28, y1: 68, x2: 50, y2: 58, type: "pass",  value: 3 },
-        { x1: 50, y1: 58, x2: 70, y2: 62, type: "pass",  value: 5 },
+        { x1: 8,  y1: 50, x2: 28, y2: 68, type: "pass",    value: 4 },
+        { x1: 28, y1: 68, x2: 50, y2: 58, type: "pass",    value: 3 },
+        { x1: 50, y1: 58, x2: 70, y2: 62, type: "pass",    value: 5 },
         { x1: 70, y1: 62, x2: 86, y2: 54, type: "shot" },
         { x1: 42, y1: 44, x2: 55, y2: 30, type: "dribble" },
         { x1: 35, y1: 55, x2: 50, y2: 65, type: "run" },
@@ -807,51 +829,102 @@ Possession,58,42`);
       // xG Chart
       XgChart.render("#xgchart-demo", {
         home: [
-          { minute: 12, xg: 0.08 },
-          { minute: 27, xg: 0.31 },
-          { minute: 38, xg: 0.12 },
-          { minute: 54, xg: 0.62 },
-          { minute: 61, xg: 0.09 },
-          { minute: 73, xg: 0.44 },
-          { minute: 82, xg: 0.18 },
-          { minute: 88, xg: 0.55 },
+          { minute: 12, xg: 0.08 }, { minute: 27, xg: 0.31 },
+          { minute: 38, xg: 0.12 }, { minute: 54, xg: 0.62 },
+          { minute: 61, xg: 0.09 }, { minute: 73, xg: 0.44 },
+          { minute: 82, xg: 0.18 }, { minute: 88, xg: 0.55 },
         ],
         away: [
-          { minute: 7,  xg: 0.14 },
-          { minute: 19, xg: 0.07 },
-          { minute: 44, xg: 0.28 },
-          { minute: 57, xg: 0.11 },
-          { minute: 66, xg: 0.52 },
-          { minute: 79, xg: 0.19 },
+          { minute: 7,  xg: 0.14 }, { minute: 19, xg: 0.07 },
+          { minute: 44, xg: 0.28 }, { minute: 57, xg: 0.11 },
+          { minute: 66, xg: 0.52 }, { minute: 79, xg: 0.19 },
           { minute: 85, xg: 0.08 },
         ],
-      }, {
-        width: 760, height: 320,
-        homeLabel: "CSKA III",
-        awayLabel: "Levski II",
-      });
+      }, { width: 760, height: 320, homeLabel: "CSKA III", awayLabel: "Levski II" });
 
       // Scatter
       Scatter.render("#scatter-demo", [
-        { x: 82, y: 0.38, label: "Rumenov",   color: "#000" },
-        { x: 76, y: 0.22, label: "Krstev",    color: "#000" },
-        { x: 89, y: 0.51, label: "Mikhalev",  color: "#000" },
-        { x: 71, y: 0.44, label: "Dobrev",    color: "#000" },
-        { x: 85, y: 0.60, label: "Petrov",    color: "#000" },
-        { x: 68, y: 0.18, label: "Georgiev",  color: "#e11d48" },
-        { x: 79, y: 0.32, label: "Ivanov",    color: "#e11d48" },
-        { x: 91, y: 0.47, label: "Stoyanov",  color: "#e11d48" },
-        { x: 73, y: 0.55, label: "Marinov",   color: "#e11d48" },
-        { x: 86, y: 0.29, label: "Kolev",     color: "#e11d48" },
-      ], {
-        width: 620, height: 400,
-        xLabel: "Pass accuracy (%)",
-        yLabel: "xG per 90",
-        refLines: [
-          { axis: "x", value: 80, label: "League avg" },
-          { axis: "y", value: 0.35, label: "League avg" },
-        ],
-      });
+        { x: 82, y: 0.38, label: "Rumenov",  color: "#000" },
+        { x: 76, y: 0.22, label: "Krstev",   color: "#000" },
+        { x: 89, y: 0.51, label: "Mikhalev", color: "#000" },
+        { x: 71, y: 0.44, label: "Dobrev",   color: "#000" },
+        { x: 85, y: 0.60, label: "Petrov",   color: "#000" },
+        { x: 68, y: 0.18, label: "Georgiev", color: "#e11d48" },
+        { x: 79, y: 0.32, label: "Ivanov",   color: "#e11d48" },
+        { x: 91, y: 0.47, label: "Stoyanov", color: "#e11d48" },
+        { x: 73, y: 0.55, label: "Marinov",  color: "#e11d48" },
+        { x: 86, y: 0.29, label: "Kolev",    color: "#e11d48" },
+      ], { width: 620, height: 400, xLabel: "Pass accuracy (%)", yLabel: "xG per 90",
+           refLines: [{ axis: "x", value: 80, label: "League avg" }, { axis: "y", value: 0.35, label: "League avg" }] });
+
+      // Formation (4-3-3)
+      Formation.render("#formation-demo", [
+        { number: 1,  name: "Petrov",   x: 5,  y: 50 },
+        { number: 2,  name: "Rumenov",  x: 25, y: 15 },
+        { number: 5,  name: "Krstev",   x: 25, y: 38 },
+        { number: 6,  name: "Marinov",  x: 25, y: 62 },
+        { number: 3,  name: "Dobrev",   x: 25, y: 85 },
+        { number: 8,  name: "Georgiev", x: 50, y: 25, highlight: true },
+        { number: 10, name: "Ivanov",   x: 50, y: 50, highlight: true },
+        { number: 4,  name: "Stoyanov", x: 50, y: 75 },
+        { number: 11, name: "Kolev",    x: 78, y: 20 },
+        { number: 9,  name: "Mikhalev", x: 78, y: 50, highlight: true },
+        { number: 7,  name: "Emilov",   x: 78, y: 80 },
+      ], { width: 540, height: 400, label: "CSKA III", formation: "4-3-3", halfPitch: false });
+
+      // Momentum
+      Momentum.render("#momentum-demo", [
+        { minute: 5,  value: 30 },  { minute: 10, value: 55 },
+        { minute: 15, value: 20 },  { minute: 20, value: -40 },
+        { minute: 25, value: -60 }, { minute: 30, value: 15 },
+        { minute: 35, value: 45 },  { minute: 40, value: 70 },
+        { minute: 45, value: 30 },  { minute: 50, value: -25 },
+        { minute: 55, value: -70 }, { minute: 60, value: -45 },
+        { minute: 65, value: 10 },  { minute: 70, value: 60 },
+        { minute: 75, value: 80 },  { minute: 80, value: 35 },
+        { minute: 85, value: -20 }, { minute: 90, value: 50 },
+      ], { width: 760, height: 200, homeLabel: "CSKA III", awayLabel: "Levski II" });
+
+      // Heatmap (pressing zones)
+      Heatmap.render("#heatmap-demo", [
+        // High press: right side
+        ...Array.from({ length: 40 }, () => ({
+          x: 65 + Math.random() * 30, y: 20 + Math.random() * 60,
+        })),
+        // Mid block: center
+        ...Array.from({ length: 25 }, () => ({
+          x: 35 + Math.random() * 25, y: 25 + Math.random() * 50,
+        })),
+        // Low activity: own half
+        ...Array.from({ length: 10 }, () => ({
+          x: Math.random() * 30, y: 15 + Math.random() * 70,
+        })),
+      ], { width: 700, height: 430, color: "YlOrRd" });
+
+      // Event log
+      EventLog.render("eventlog-demo", [
+        { minute: 7,  type: "yellow-card", text: "Krstev (foul)",            team: "home" },
+        { minute: 18, type: "goal",        text: "Emilov (assist: Ivanov)",   team: "home" },
+        { minute: 34, type: "goal",        text: "Stoyanov",                  team: "away" },
+        { minute: 45, type: "var",         text: "Goal reviewed — confirmed", team: "home" },
+        { minute: 58, type: "sub",         text: "Mikhalev → Georgiev",       team: "home" },
+        { minute: 63, type: "red-card",    text: "Marinov (2nd yellow)",      team: "away" },
+        { minute: 71, type: "penalty",     text: "Penalty awarded",           team: "home" },
+        { minute: 72, type: "goal",        text: "Ivanov (pen.)",             team: "home" },
+        { minute: 87, type: "goal",        text: "Kolev",                     team: "away" },
+      ]);
+
+      // Shot quality
+      ShotQuality.render("#shotquality-demo", [
+        { x: 87, y: 44, xg: 0.62, result: "goal",   label: "18'" },
+        { x: 91, y: 52, xg: 0.44, result: "goal",   label: "72' pen" },
+        { x: 83, y: 38, xg: 0.18, result: "saved" },
+        { x: 76, y: 58, xg: 0.11, result: "saved" },
+        { x: 93, y: 48, xg: 0.08, result: "missed" },
+        { x: 70, y: 34, xg: 0.09, result: "missed" },
+        { x: 88, y: 62, xg: 0.31, result: "saved" },
+        { x: 95, y: 50, xg: 0.05, result: "missed" },
+      ], { width: 700, height: 430 });
 
       // Active nav highlight on scroll
       const sections = document.querySelectorAll(".docs-section");

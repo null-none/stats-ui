@@ -1,0 +1,103 @@
+# Stats UI
+
+Component library for football statistics visualization.
+Plain HTML + D3.js. Styles compiled from SCSS.
+
+## Quick start
+
+```bash
+npm install
+npm run build
+```
+
+Open `index.html` in a browser — no server required.
+
+## Build
+
+| Command | Description |
+|---------|-------------|
+| `npm run build` | Build JS + CSS |
+| `npm run build:js` | Bundle JS only (`dist/stats-ui.js`) |
+| `npm run build:css` | Compile SCSS only (`dist/stats-ui.css`) |
+| `npm run watch` | Watch both in parallel |
+
+Output goes to `dist/`. D3.js v7 is loaded separately from CDN.
+
+## Usage
+
+```html
+<link rel="stylesheet" href="dist/stats-ui.css" />
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="dist/stats-ui.js"></script>
+
+<script>
+  const { Bars, Radar, Heatmap } = StatsUI;
+  Bars.render("container-id", csvData);
+</script>
+```
+
+## Components
+
+### Layout
+| Component | Description |
+|-----------|-------------|
+| `Header` | Top bar with logo and season metadata |
+| `Card` | Container with title, meta, and body |
+
+### Data
+| Component | Description |
+|-----------|-------------|
+| `Number` | Large stat value with label and delta indicator |
+| `Form` | Recent results strip (W / D / L) |
+| `Metric` | Horizontal progress bar for a single metric |
+| `EventLog` | Chronological match events with icons |
+
+### Tables
+| Component | Description |
+|-----------|-------------|
+| `Dual` | Side-by-side team comparison table |
+| `Table` | Player statistics table |
+
+### Visualizations
+| Component | API | Description |
+|-----------|-----|-------------|
+| `Bars` | `Bars.render(id, csv)` | Dual comparison bars (CSV input) |
+| `Pie` | `Pie.render(sel, data, opts)` | Pie chart with animation |
+| `TacticalFlow` | `TacticalFlow.render(sel, data, opts)` | Attack/defense line chart |
+| `Radar` | `Radar.render(sel, datasets, opts)` | Spider/radar chart |
+| `Pitch` | `Pitch.render(id, csv)` | Zone heatmap on pitch grid |
+| `PassNetwork` | `PassNetwork.draw(sel, players, passes)` | Player pass network |
+| `Shotmap` | `Shotmap.render(sel, shots, opts)` | Shots on goal frame |
+| `Pitchmap` | `Pitchmap.render(sel, events, opts)` | Action dots on full pitch |
+| `Arrowmap` | `Arrowmap.render(sel, arrows, opts)` | Directional arrows on pitch |
+| `XgChart` | `XgChart.render(sel, data, opts)` | Cumulative xG over time |
+| `Scatter` | `Scatter.render(sel, data, opts)` | 2D scatter plot |
+| `Formation` | `Formation.render(sel, players, opts)` | Team formation on pitch |
+| `Momentum` | `Momentum.render(sel, data, opts)` | Match momentum timeline |
+| `Heatmap` | `Heatmap.render(sel, points, opts)` | Density heatmap on pitch |
+| `ShotQuality` | `ShotQuality.render(sel, shots, opts)` | xG bubble map on pitch |
+
+## Structure
+
+```
+src/
+  utils/
+    pitchDraw.js     Shared pitch outline utility
+    colors.js        Design token constants
+  components/        One file per component (ES modules)
+  index.js           Exports all components
+scss/
+  _variables.scss    Design tokens
+  _mixins.scss       Reusable mixins
+  _*.scss            One partial per component
+  main.scss          Entry point
+dist/
+  stats-ui.js        Bundled output (window.StatsUI)
+  stats-ui.css       Compiled CSS
+```
+
+## Coordinates
+
+Pitch-based components (`Pitchmap`, `Arrowmap`, `Heatmap`, `Formation`, `ShotQuality`) use a **0–100 coordinate system** where `(0, 0)` is the top-left corner and attack goes left → right.
+
+Shot map (`Shotmap`) uses **0–100** relative to the goal frame face.

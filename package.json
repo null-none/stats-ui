@@ -3,10 +3,16 @@
   "version": "1.0.0",
   "description": "Football statistics UI components",
   "scripts": {
-    "build": "sass scss/main.scss style.css --style=compressed",
-    "watch": "sass scss/main.scss style.css --watch"
+    "build":     "npm run build:js && npm run build:css",
+    "build:js":  "esbuild src/index.js --bundle --outfile=dist/stats-ui.js --global-name=StatsUI --platform=browser",
+    "build:css": "sass scss/main.scss dist/stats-ui.css --style=compressed",
+    "watch:js":  "esbuild src/index.js --bundle --outfile=dist/stats-ui.js --global-name=StatsUI --platform=browser --watch",
+    "watch:css": "sass scss/main.scss dist/stats-ui.css --watch",
+    "watch":     "concurrently \"npm run watch:js\" \"npm run watch:css\""
   },
   "devDependencies": {
+    "concurrently": "^8.2.0",
+    "esbuild": "^0.21.0",
     "sass": "^1.77.0"
   }
 }

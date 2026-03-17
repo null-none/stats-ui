@@ -1,0 +1,67 @@
+@use 'variables' as *;
+
+.stats-momentum {
+  &-bg-home {
+    fill: rgba(0, 0, 0, 0.03);
+  }
+
+  &-bg-away {
+    fill: rgba(225, 29, 72, 0.03);
+  }
+
+  &-zero {
+    stroke: $color-border-solid;
+    stroke-width: 1;
+  }
+
+  &-halftime {
+    stroke: $color-border-solid;
+    stroke-width: 1;
+    stroke-dasharray: 5 4;
+  }
+
+  &-halftime-label {
+    font-size: $font-size-xs;
+    fill: $color-muted;
+    text-anchor: middle;
+  }
+
+  &-bar-home {
+    fill: $color-black;
+    opacity: 0.55;
+  }
+
+  &-bar-away {
+    fill: $color-red;
+    opacity: 0.55;
+  }
+
+  &-area-home {
+    fill: $color-black;
+    fill-opacity: 0.12;
+    stroke: $color-black;
+    stroke-width: 1.5;
+    stroke-opacity: 0.6;
+  }
+
+  &-area-away {
+    fill: $color-red;
+    fill-opacity: 0.12;
+    stroke: $color-red;
+    stroke-width: 1.5;
+    stroke-opacity: 0.6;
+  }
+
+  &-team-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: $tracking-sm;
+  }
+
+  &-tick {
+    font-size: $font-size-xs;
+    fill: $color-muted;
+    text-anchor: middle;
+  }
+}
