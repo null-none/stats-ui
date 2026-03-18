@@ -1,8 +1,8 @@
 /**
  * EventLog.render(containerId, events, options)
  *
- * events – [{ minute, type, text, team? }]
- *   type  – 'goal' | 'yellow-card' | 'red-card' | 'sub' | 'var' | 'penalty'
+ * events – [{ minute, second?, type, text, team? }]
+ *   type  – 'goal' | 'yellow-card' | 'red-card' | 'sub' | 'var' | 'penalty' | 'foul'
  *   team  – 'home' | 'away'  (affects alignment)
  *
  * options – { maxHeight (px, enables scroll) }
@@ -16,6 +16,7 @@ const TYPE_LABEL = {
   'sub':         'Substitution',
   'var':         'VAR',
   'penalty':     'Penalty',
+  'foul':        'Foul',
 };
 
 function render(containerId, events, options = {}) {
@@ -26,7 +27,11 @@ function render(containerId, events, options = {}) {
   if (options.maxHeight)
     container.style.maxHeight = `${options.maxHeight}px`;
 
-  const sorted = events.slice().sort((a, b) => a.minute - b.minute);
+  const sorted = events.slice().sort((a, b) => {
+    const at = a.minute * 60 + (a.second ?? 0);
+    const bt = b.minute * 60 + (b.second ?? 0);
+    return at - bt;
+  });
 
   sorted.forEach((e) => {
     const item = document.createElement('div');
@@ -35,8 +40,12 @@ function render(containerId, events, options = {}) {
       `stats-eventlog-item--${e.team || 'home'}`,
     ].join(' ');
 
+    const timeLabel = e.second != null
+      ? `${e.minute}:${String(e.second).padStart(2, '0')}`
+      : `${e.minute}'`;
+
     item.innerHTML = `
-      <span class="stats-eventlog-time">${e.minute}'</span>
+      <span class="stats-eventlog-time">${timeLabel}</span>
       <span class="stats-eventlog-icon stats-eventlog-icon--${e.type || 'default'}"
             title="${TYPE_LABEL[e.type] || e.type}"></span>
       <span class="stats-eventlog-text">${e.text}</span>`;

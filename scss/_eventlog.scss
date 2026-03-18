@@ -43,6 +43,7 @@
     &--sub         { background: $color-accent; }
     &--var         { background: $color-muted; border-radius: $border-radius-sm; }
     &--penalty     { background: $color-black; box-shadow: inset 0 0 0 2px $color-red; }
+    &--foul        { background: $color-draw; }
     &--default     { background: $color-muted; }
   }
 

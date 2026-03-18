@@ -593,7 +593,8 @@ var StatsUI = (() => {
     "red-card": "Red card",
     "sub": "Substitution",
     "var": "VAR",
-    "penalty": "Penalty"
+    "penalty": "Penalty",
+    "foul": "Foul"
   };
   function render14(containerId, events, options = {}) {
     const container = document.getElementById(containerId);
@@ -601,15 +602,20 @@ var StatsUI = (() => {
     container.className = "stats-eventlog";
     if (options.maxHeight)
       container.style.maxHeight = `${options.maxHeight}px`;
-    const sorted = events.slice().sort((a, b) => a.minute - b.minute);
+    const sorted = events.slice().sort((a, b) => {
+      const at = a.minute * 60 + (a.second ?? 0);
+      const bt = b.minute * 60 + (b.second ?? 0);
+      return at - bt;
+    });
     sorted.forEach((e) => {
       const item = document.createElement("div");
       item.className = [
         "stats-eventlog-item",
         `stats-eventlog-item--${e.team || "home"}`
       ].join(" ");
+      const timeLabel = e.second != null ? `${e.minute}:${String(e.second).padStart(2, "0")}` : `${e.minute}'`;
       item.innerHTML = `
-      <span class="stats-eventlog-time">${e.minute}'</span>
+      <span class="stats-eventlog-time">${timeLabel}</span>
       <span class="stats-eventlog-icon stats-eventlog-icon--${e.type || "default"}"
             title="${TYPE_LABEL[e.type] || e.type}"></span>
       <span class="stats-eventlog-text">${e.text}</span>`;
