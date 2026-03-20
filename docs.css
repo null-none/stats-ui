@@ -1,0 +1,280 @@
+/* ── Docs layout ────────────────────────────────────────────── */
+:root {
+  --sidebar-w: 220px;
+  --content-max: 860px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Exo 2", sans-serif;
+  font-size: 15px;
+  color: #000;
+  background: #fff;
+}
+
+/* ── Sidebar ────────────────────────────────────────────────── */
+.docs-sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid rgba(148,163,184,.22);
+  padding: 28px 0 40px;
+  background: #fafafa;
+}
+
+.docs-sidebar-brand {
+  padding: 0 20px 20px;
+  border-bottom: 1px solid rgba(148,163,184,.2);
+  margin-bottom: 16px;
+}
+
+.docs-sidebar-brand h2 {
+  margin: 0 0 2px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+}
+
+.docs-sidebar-brand p {
+  margin: 0;
+  font-size: 11px;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+.docs-sidebar-section {
+  padding: 6px 20px 2px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: #9ca3af;
+  margin-top: 10px;
+}
+
+.docs-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.docs-nav a {
+  display: block;
+  padding: 6px 20px;
+  font-size: 13px;
+  color: #333;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: background .12s, border-color .12s;
+}
+
+.docs-nav a:hover,
+.docs-nav a.active {
+  background: rgba(0,0,0,.04);
+  border-left-color: #000;
+}
+
+/* ── Main content ───────────────────────────────────────────── */
+.docs-main {
+  margin-left: var(--sidebar-w);
+  padding: 0 40px 80px;
+  max-width: calc(var(--sidebar-w) + var(--content-max));
+}
+
+/* ── Hero ───────────────────────────────────────────────────── */
+.docs-hero {
+  padding: 56px 0 40px;
+  border-bottom: 1px solid rgba(148,163,184,.2);
+  margin-bottom: 0;
+}
+
+.docs-hero h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.docs-hero p {
+  margin: 0;
+  font-size: 15px;
+  color: #555;
+  max-width: 540px;
+  line-height: 1.6;
+}
+
+/* ── Section ────────────────────────────────────────────────── */
+.docs-section {
+  padding: 48px 0;
+  border-bottom: 1px solid rgba(148,163,184,.18);
+}
+
+.docs-section:last-child { border-bottom: none; }
+
+.docs-section-header {
+  margin-bottom: 10px;
+}
+
+.docs-section-header h2 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.docs-section-header p {
+  margin: 0;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+/* ── Preview box ────────────────────────────────────────────── */
+.docs-preview {
+  margin-top: 20px;
+  padding: 28px;
+  border: 1px solid rgba(148,163,184,.25);
+  border-radius: 8px;
+  background: #fff;
+  overflow-x: auto;
+}
+
+/* ── Utility rows for side-by-side items ────────────────────── */
+.docs-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* ── Component tag badge ────────────────────────────────────── */
+.docs-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #f4f4f4;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  :root {
+    --sidebar-w: 180px;
+  }
+
+  .docs-main {
+    padding: 0 24px 80px;
+  }
+}
+
+@media (max-width: 640px) {
+  .docs-sidebar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid rgba(148,163,184,.22);
+    padding: 0;
+    z-index: 100;
+    overflow-y: visible;
+    overflow-x: hidden;
+  }
+
+  .docs-sidebar-brand {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(148,163,184,.2);
+    margin-bottom: 0;
+  }
+
+  .docs-sidebar-brand h2 {
+    margin: 0;
+    font-size: 13px;
+  }
+
+  .docs-sidebar-brand p {
+    margin: 0;
+    font-size: 11px;
+  }
+
+  .docs-sidebar-section {
+    display: none;
+  }
+
+  .docs-sidebar-nav-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    padding: 4px 8px;
+    gap: 0;
+    scrollbar-width: none;
+  }
+
+  .docs-sidebar-nav-wrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  .docs-nav {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .docs-nav a {
+    padding: 6px 10px;
+    font-size: 12px;
+    border-left: none;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+
+  .docs-nav a:hover,
+  .docs-nav a.active {
+    background: rgba(0,0,0,.04);
+    border-left-color: transparent;
+    border-bottom-color: #000;
+  }
+
+  .docs-main {
+    margin-left: 0;
+    padding: 0 16px 60px;
+    max-width: 100%;
+  }
+
+  .docs-hero {
+    padding: 28px 0 24px;
+  }
+
+  .docs-hero h1 {
+    font-size: 24px;
+  }
+
+  .docs-hero p {
+    font-size: 14px;
+  }
+
+  .docs-section {
+    padding: 28px 0;
+  }
+
+  .docs-section-header h2 {
+    font-size: 17px;
+  }
+
+  .docs-preview {
+    padding: 16px;
+  }
+}

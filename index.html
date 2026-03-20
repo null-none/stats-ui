@@ -10,176 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;0,700;1,400&display=swap&subset=cyrillic"
       rel="stylesheet"
     />
-    <style>
-      /* ── Docs layout ────────────────────────────────────────────── */
-      :root {
-        --sidebar-w: 220px;
-        --content-max: 860px;
-      }
-
-      * { box-sizing: border-box; }
-
-      html, body {
-        margin: 0;
-        padding: 0;
-        font-family: "Exo 2", sans-serif;
-        font-size: 15px;
-        color: #000;
-        background: #fff;
-      }
-
-      /* ── Sidebar ────────────────────────────────────────────────── */
-      .docs-sidebar {
-        position: fixed;
-        top: 0; left: 0;
-        width: var(--sidebar-w);
-        height: 100vh;
-        overflow-y: auto;
-        border-right: 1px solid rgba(148,163,184,.22);
-        padding: 28px 0 40px;
-        background: #fafafa;
-      }
-
-      .docs-sidebar-brand {
-        padding: 0 20px 20px;
-        border-bottom: 1px solid rgba(148,163,184,.2);
-        margin-bottom: 16px;
-      }
-
-      .docs-sidebar-brand h2 {
-        margin: 0 0 2px;
-        font-size: 14px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: .18em;
-      }
-
-      .docs-sidebar-brand p {
-        margin: 0;
-        font-size: 11px;
-        color: #9ca3af;
-        text-transform: uppercase;
-        letter-spacing: .12em;
-      }
-
-      .docs-sidebar-section {
-        padding: 6px 20px 2px;
-        font-size: 10px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: .14em;
-        color: #9ca3af;
-        margin-top: 10px;
-      }
-
-      .docs-nav {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      .docs-nav a {
-        display: block;
-        padding: 6px 20px;
-        font-size: 13px;
-        color: #333;
-        text-decoration: none;
-        border-left: 2px solid transparent;
-        transition: background .12s, border-color .12s;
-      }
-
-      .docs-nav a:hover,
-      .docs-nav a.active {
-        background: rgba(0,0,0,.04);
-        border-left-color: #000;
-      }
-
-      /* ── Main content ───────────────────────────────────────────── */
-      .docs-main {
-        margin-left: var(--sidebar-w);
-        padding: 0 40px 80px;
-        max-width: calc(var(--sidebar-w) + var(--content-max));
-      }
-
-      /* ── Hero ───────────────────────────────────────────────────── */
-      .docs-hero {
-        padding: 56px 0 40px;
-        border-bottom: 1px solid rgba(148,163,184,.2);
-        margin-bottom: 0;
-      }
-
-      .docs-hero h1 {
-        margin: 0 0 8px;
-        font-size: 32px;
-        font-weight: 700;
-      }
-
-      .docs-hero p {
-        margin: 0;
-        font-size: 15px;
-        color: #555;
-        max-width: 540px;
-        line-height: 1.6;
-      }
-
-      /* ── Section ────────────────────────────────────────────────── */
-      .docs-section {
-        padding: 48px 0;
-        border-bottom: 1px solid rgba(148,163,184,.18);
-      }
-
-      .docs-section:last-child { border-bottom: none; }
-
-      .docs-section-header {
-        margin-bottom: 10px;
-      }
-
-      .docs-section-header h2 {
-        margin: 0 0 4px;
-        font-size: 20px;
-        font-weight: 700;
-      }
-
-      .docs-section-header p {
-        margin: 0;
-        font-size: 13px;
-        color: #555;
-        line-height: 1.6;
-        max-width: 600px;
-      }
-
-      /* ── Preview box ────────────────────────────────────────────── */
-      .docs-preview {
-        margin-top: 20px;
-        padding: 28px;
-        border: 1px solid rgba(148,163,184,.25);
-        border-radius: 8px;
-        background: #fff;
-        overflow-x: auto;
-      }
-
-      /* ── Utility rows for side-by-side items ────────────────────── */
-      .docs-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        align-items: flex-start;
-      }
-
-      /* ── Component tag badge ────────────────────────────────────── */
-      .docs-tag {
-        display: inline-block;
-        padding: 2px 8px;
-        font-size: 11px;
-        font-weight: 600;
-        background: #f4f4f4;
-        border: 1px solid #e0e0e0;
-        border-radius: 4px;
-        font-family: monospace;
-        color: #333;
-        margin-bottom: 10px;
-      }
-    </style>
+    <link rel="stylesheet" href="docs.css" />
   </head>
   <body>
 
@@ -190,52 +21,54 @@
         <p>v1.0.1 · Components</p>
       </div>
 
-      <div class="docs-sidebar-section">Layout</div>
-      <ul class="docs-nav">
-        <li><a href="#header">Header</a></li>
-        <li><a href="#card">Card</a></li>
-      </ul>
+      <div class="docs-sidebar-nav-wrap">
+        <div class="docs-sidebar-section">Layout</div>
+        <ul class="docs-nav">
+          <li><a href="#header">Header</a></li>
+          <li><a href="#card">Card</a></li>
+        </ul>
 
-      <div class="docs-sidebar-section">Data</div>
-      <ul class="docs-nav">
-        <li><a href="#score">Score</a></li>
-        <li><a href="#badge">Badge</a></li>
-        <li><a href="#player-card">Player card</a></li>
-        <li><a href="#stat-row">Stat row</a></li>
-        <li><a href="#section">Section</a></li>
-        <li><a href="#dual">Dual table</a></li>
-        <li><a href="#table">Player table</a></li>
-        <li><a href="#number">Number</a></li>
-        <li><a href="#form">Form strip</a></li>
-        <li><a href="#metric">Metric bar</a></li>
-      </ul>
+        <div class="docs-sidebar-section">Data</div>
+        <ul class="docs-nav">
+          <li><a href="#score">Score</a></li>
+          <li><a href="#badge">Badge</a></li>
+          <li><a href="#player-card">Player card</a></li>
+          <li><a href="#stat-row">Stat row</a></li>
+          <li><a href="#section">Section</a></li>
+          <li><a href="#dual">Dual table</a></li>
+          <li><a href="#table">Player table</a></li>
+          <li><a href="#number">Number</a></li>
+          <li><a href="#form">Form strip</a></li>
+          <li><a href="#metric">Metric bar</a></li>
+        </ul>
 
-      <div class="docs-sidebar-section">Grid</div>
-      <ul class="docs-nav">
-        <li><a href="#grid">tiny-grid</a></li>
-      </ul>
+        <div class="docs-sidebar-section">Grid</div>
+        <ul class="docs-nav">
+          <li><a href="#grid">tiny-grid</a></li>
+        </ul>
 
-      <div class="docs-sidebar-section">Visualizations</div>
-      <ul class="docs-nav">
-        <li><a href="#timeline">Timeline</a></li>
-        <li><a href="#bars">Bars</a></li>
-        <li><a href="#pie">Pie</a></li>
-        <li><a href="#field">Field zones</a></li>
-        <li><a href="#pitch">Pitch heatmap</a></li>
-        <li><a href="#pass-network">Pass network</a></li>
-        <li><a href="#tactical-flow">Tactical flow</a></li>
-        <li><a href="#radar">Radar</a></li>
-        <li><a href="#shotmap">Shot map</a></li>
-        <li><a href="#pitchmap">Pitch map</a></li>
-        <li><a href="#arrowmap">Arrow map</a></li>
-        <li><a href="#xgchart">xG chart</a></li>
-        <li><a href="#scatter">Scatter</a></li>
-        <li><a href="#formation">Formation</a></li>
-        <li><a href="#momentum">Momentum</a></li>
-        <li><a href="#heatmap">Heatmap</a></li>
-        <li><a href="#eventlog">Event log</a></li>
-        <li><a href="#shotquality">Shot quality</a></li>
-      </ul>
+        <div class="docs-sidebar-section">Visualizations</div>
+        <ul class="docs-nav">
+          <li><a href="#timeline">Timeline</a></li>
+          <li><a href="#bars">Bars</a></li>
+          <li><a href="#pie">Pie</a></li>
+          <li><a href="#field">Field zones</a></li>
+          <li><a href="#pitch">Pitch heatmap</a></li>
+          <li><a href="#pass-network">Pass network</a></li>
+          <li><a href="#tactical-flow">Tactical flow</a></li>
+          <li><a href="#radar">Radar</a></li>
+          <li><a href="#shotmap">Shot map</a></li>
+          <li><a href="#pitchmap">Pitch map</a></li>
+          <li><a href="#arrowmap">Arrow map</a></li>
+          <li><a href="#xgchart">xG chart</a></li>
+          <li><a href="#scatter">Scatter</a></li>
+          <li><a href="#formation">Formation</a></li>
+          <li><a href="#momentum">Momentum</a></li>
+          <li><a href="#heatmap">Heatmap</a></li>
+          <li><a href="#eventlog">Event log</a></li>
+          <li><a href="#shotquality">Shot quality</a></li>
+        </ul>
+      </div>
     </aside>
 
     <!-- ── Main content ───────────────────────────────────────────── -->
