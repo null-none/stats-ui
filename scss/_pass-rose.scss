@@ -1,0 +1,44 @@
+@use 'variables' as *;
+
+.stats-pass-rose {
+  &-sector {
+    stroke: $color-bg;
+    stroke-width: 1.5;
+  }
+
+  &-ring {
+    fill: none;
+    stroke: $color-border-solid;
+    stroke-width: 1;
+  }
+
+  &-spoke {
+    stroke: $color-border-solid;
+    stroke-width: 1;
+  }
+
+  &-label {
+    font-size: $font-size-xs;
+    fill: $color-muted;
+    text-anchor: middle;
+    dominant-baseline: central;
+    font-family: inherit;
+  }
+
+  &-center-val {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    fill: $color-text;
+    text-anchor: middle;
+    dominant-baseline: central;
+    font-family: inherit;
+  }
+
+  &-center-lbl {
+    font-size: $font-size-xs;
+    fill: $color-muted;
+    text-anchor: middle;
+    dominant-baseline: central;
+    font-family: inherit;
+  }
+}

@@ -17,3 +17,10 @@ export { Momentum }     from './components/momentum.js';
 export { Heatmap }      from './components/heatmap.js';
 export { EventLog }     from './components/eventLog.js';
 export { ShotQuality }  from './components/shotQuality.js';
+
+// Analytics components
+export { MatchStats }   from './components/matchStats.js';
+export { SeasonTrend }  from './components/seasonTrend.js';
+export { PassRose }     from './components/passRose.js';
+export { DuelsMap }     from './components/duelsMap.js';
+export { SetPiece }     from './components/setPiece.js';

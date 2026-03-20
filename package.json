@@ -1,6 +1,6 @@
 {
   "name": "stats-ui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Football statistics UI components",
   "scripts": {
     "build":     "npm run build:js && npm run build:css",

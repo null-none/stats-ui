@@ -1,0 +1,27 @@
+@use 'variables' as *;
+
+.stats-duels-map {
+  &-won-aerial,
+  &-won-ground {
+    fill: $color-black;
+  }
+
+  &-lost-aerial {
+    fill: none;
+    stroke: $color-loss;
+    stroke-width: 1.5;
+  }
+
+  &-lost-ground {
+    fill: none;
+    stroke: $color-muted;
+    stroke-width: 1.5;
+  }
+
+  &-legend {
+    font-size: $font-size-xs;
+    fill: $color-muted;
+    font-family: inherit;
+    dominant-baseline: central;
+  }
+}

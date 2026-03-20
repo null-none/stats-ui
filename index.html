@@ -18,7 +18,7 @@
     <aside class="docs-sidebar">
       <div class="docs-sidebar-brand">
         <h2>Stats UI</h2>
-        <p>v1.0.1 · Components</p>
+        <p>v1.0.2 · Components</p>
       </div>
 
       <div class="docs-sidebar-nav-wrap">
@@ -45,6 +45,15 @@
         <div class="docs-sidebar-section">Grid</div>
         <ul class="docs-nav">
           <li><a href="#grid">tiny-grid</a></li>
+        </ul>
+
+        <div class="docs-sidebar-section">Analytics</div>
+        <ul class="docs-nav">
+          <li><a href="#match-stats">Match stats</a></li>
+          <li><a href="#season-trend">Season trend</a></li>
+          <li><a href="#pass-rose">Pass rose</a></li>
+          <li><a href="#duels-map">Duels map</a></li>
+          <li><a href="#set-piece">Set piece</a></li>
         </ul>
 
         <div class="docs-sidebar-section">Visualizations</div>
@@ -861,6 +870,66 @@
         </div>
       </section>
 
+      <!-- ── Match stats panel ──────────────────────────────────── -->
+      <section id="match-stats" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Match stats panel</h2>
+          <p>Two-team comparison rows with centred bars. Accepts any numeric stats from Wyscout/Sportbase match data.</p>
+        </div>
+        <span class="docs-tag">MatchStats.render(id, data, options)</span>
+        <div class="docs-preview">
+          <div id="match-stats-demo"></div>
+        </div>
+      </section>
+
+      <!-- ── Season trend ───────────────────────────────────────── -->
+      <section id="season-trend" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Season trend</h2>
+          <p>GF/GA and xGF/xGA by match week. Solid lines are actual goals, dashed are expected values.</p>
+        </div>
+        <span class="docs-tag">SeasonTrend.render(selector, data, options)</span>
+        <div class="docs-preview">
+          <svg id="season-trend-demo"></svg>
+        </div>
+      </section>
+
+      <!-- ── Passing direction rose ─────────────────────────────── -->
+      <section id="pass-rose" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Passing direction rose</h2>
+          <p>Radial compass chart of pass direction distribution. Sector size = pass count, colour = completion rate (dark ≥80%, grey ≥65%, light &lt;65%).</p>
+        </div>
+        <span class="docs-tag">PassRose.render(selector, sectors, options)</span>
+        <div class="docs-preview">
+          <svg id="pass-rose-demo"></svg>
+        </div>
+      </section>
+
+      <!-- ── Duels map ───────────────────────────────────────────── -->
+      <section id="duels-map" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Duels map</h2>
+          <p>Ground and aerial duel locations on the pitch. Filled = won, outline = lost. Red outline = aerial lost, grey = ground lost.</p>
+        </div>
+        <span class="docs-tag">DuelsMap.render(selector, duels, options)</span>
+        <div class="docs-preview" style="overflow-x:auto;">
+          <svg id="duels-map-demo"></svg>
+        </div>
+      </section>
+
+      <!-- ── Set piece zones ────────────────────────────────────── -->
+      <section id="set-piece" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Set piece zones</h2>
+          <p>Delivery arcs for corners and free kicks. Cross = delivery point, dot = landing zone. Colour encodes outcome: black = goal, grey = chance, dashed = cleared.</p>
+        </div>
+        <span class="docs-tag">SetPiece.render(selector, deliveries, options)</span>
+        <div class="docs-preview" style="overflow-x:auto;">
+          <svg id="set-piece-demo"></svg>
+        </div>
+      </section>
+
     </main>
 
     <!-- ── Scripts ────────────────────────────────────────────────── -->
@@ -872,6 +941,7 @@
         Bars, Pie, Pitch, PassNetwork, TacticalFlow, Radar, Shotmap,
         Pitchmap, Arrowmap, XgChart, Scatter,
         Formation, Momentum, Heatmap, EventLog, ShotQuality,
+        MatchStats, SeasonTrend, PassRose, DuelsMap, SetPiece,
       } = StatsUI;
 
       // Bars
@@ -1079,6 +1149,76 @@ Possession,58,42`);
         { x: 88, y: 62, xg: 0.31, result: "saved" },
         { x: 95, y: 50, xg: 0.05, result: "missed" },
       ], { width: 700, height: 430 });
+
+      // Match stats panel
+      MatchStats.render("match-stats-demo", [
+        { label: "Possession %",    a: 58,   b: 42   },
+        { label: "Shots",           a: 12,   b: 8    },
+        { label: "Shots on target", a: 5,    b: 3    },
+        { label: "xG",              a: 1.82, b: 0.74 },
+        { label: "Passes",          a: 487,  b: 312  },
+        { label: "Pass accuracy %", a: 86,   b: 78   },
+        { label: "Corners",         a: 6,    b: 3    },
+        { label: "Fouls",           a: 11,   b: 14   },
+        { label: "Yellow cards",    a: 2,    b: 3    },
+      ], { teamA: "CSKA III", teamB: "Levski II", scoreA: 2, scoreB: 1 });
+
+      // Season trend
+      SeasonTrend.render("#season-trend-demo", [
+        { week: 1,  gf: 2, ga: 1, xgf: 1.8, xga: 0.9 },
+        { week: 2,  gf: 0, ga: 2, xgf: 1.2, xga: 2.1 },
+        { week: 3,  gf: 3, ga: 0, xgf: 2.4, xga: 0.6 },
+        { week: 4,  gf: 1, ga: 1, xgf: 1.5, xga: 1.4 },
+        { week: 5,  gf: 2, ga: 2, xgf: 1.9, xga: 2.2 },
+        { week: 6,  gf: 4, ga: 1, xgf: 3.1, xga: 0.8 },
+        { week: 7,  gf: 0, ga: 3, xgf: 0.7, xga: 2.8 },
+        { week: 8,  gf: 2, ga: 0, xgf: 1.6, xga: 0.5 },
+        { week: 9,  gf: 1, ga: 1, xgf: 1.3, xga: 1.1 },
+        { week: 10, gf: 3, ga: 2, xgf: 2.5, xga: 1.7 },
+      ], { width: 720, height: 280 });
+
+      // Passing direction rose
+      PassRose.render("#pass-rose-demo", [
+        { label: "N",  count: 18, accuracy: 0.83 },
+        { label: "NE", count: 42, accuracy: 0.91 },
+        { label: "E",  count: 67, accuracy: 0.88 },
+        { label: "SE", count: 55, accuracy: 0.85 },
+        { label: "S",  count: 24, accuracy: 0.74 },
+        { label: "SW", count: 12, accuracy: 0.58 },
+        { label: "W",  count: 19, accuracy: 0.66 },
+        { label: "NW", count: 31, accuracy: 0.79 },
+      ], { size: 300 });
+
+      // Duels map
+      DuelsMap.render("#duels-map-demo", [
+        { x: 28, y: 38, won: true,  type: "aerial"  },
+        { x: 55, y: 52, won: false, type: "ground"  },
+        { x: 70, y: 30, won: true,  type: "ground"  },
+        { x: 42, y: 65, won: true,  type: "aerial"  },
+        { x: 35, y: 20, won: false, type: "aerial"  },
+        { x: 80, y: 45, won: true,  type: "ground"  },
+        { x: 62, y: 72, won: false, type: "ground"  },
+        { x: 48, y: 42, won: true,  type: "ground"  },
+        { x: 20, y: 55, won: false, type: "aerial"  },
+        { x: 75, y: 60, won: true,  type: "aerial"  },
+        { x: 58, y: 28, won: false, type: "ground"  },
+        { x: 33, y: 78, won: true,  type: "ground"  },
+        { x: 65, y: 48, won: true,  type: "aerial"  },
+        { x: 50, y: 35, won: false, type: "aerial"  },
+        { x: 88, y: 55, won: true,  type: "ground"  },
+      ], { width: 700, height: 440 });
+
+      // Set piece zones
+      SetPiece.render("#set-piece-demo", [
+        { fromX: 100, fromY: 2,  toX: 80, toY: 25, type: "corner",   outcome: "goal"    },
+        { fromX: 100, fromY: 98, toX: 84, toY: 60, type: "corner",   outcome: "chance"  },
+        { fromX: 100, fromY: 2,  toX: 76, toY: 40, type: "corner",   outcome: "cleared" },
+        { fromX: 0,   fromY: 2,  toX: 22, toY: 30, type: "corner",   outcome: "chance"  },
+        { fromX: 0,   fromY: 98, toX: 18, toY: 65, type: "corner",   outcome: "cleared" },
+        { fromX: 72,  fromY: 8,  toX: 85, toY: 38, type: "freekick", outcome: "goal"    },
+        { fromX: 68,  fromY: 88, toX: 82, toY: 58, type: "freekick", outcome: "chance"  },
+        { fromX: 65,  fromY: 50, toX: 88, toY: 48, type: "freekick", outcome: "cleared" },
+      ], { width: 700, height: 440 });
 
       // Active nav highlight on scroll
       const sections = document.querySelectorAll(".docs-section");

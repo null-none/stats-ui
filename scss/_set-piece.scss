@@ -1,0 +1,32 @@
+@use 'variables' as *;
+
+.stats-set-piece {
+  &-arc {
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+
+    &--goal    { stroke: $color-black; }
+    &--chance  { stroke: $color-muted; }
+    &--cleared { stroke: $color-border-solid; stroke-dasharray: 4 3; }
+  }
+
+  &-from {
+    fill: none;
+    stroke: $color-muted;
+    stroke-width: 1.5;
+  }
+
+  &-to {
+    &--goal    { fill: $color-black; }
+    &--chance  { fill: $color-muted; }
+    &--cleared { fill: none; stroke: $color-muted; stroke-width: 1; }
+  }
+
+  &-legend {
+    font-size: $font-size-xs;
+    fill: $color-muted;
+    font-family: inherit;
+    dominant-baseline: central;
+  }
+}

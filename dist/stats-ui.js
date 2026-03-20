@@ -22,16 +22,21 @@ var StatsUI = (() => {
   __export(src_exports, {
     Arrowmap: () => Arrowmap,
     Bars: () => Bars,
+    DuelsMap: () => DuelsMap,
     EventLog: () => EventLog,
     Formation: () => Formation,
     Heatmap: () => Heatmap,
+    MatchStats: () => MatchStats,
     Momentum: () => Momentum,
     PassNetwork: () => PassNetwork,
+    PassRose: () => PassRose,
     Pie: () => Pie,
     Pitch: () => Pitch,
     Pitchmap: () => Pitchmap,
     Radar: () => Radar,
     Scatter: () => Scatter,
+    SeasonTrend: () => SeasonTrend,
+    SetPiece: () => SetPiece,
     ShotQuality: () => ShotQuality,
     Shotmap: () => Shotmap,
     TacticalFlow: () => TacticalFlow,
@@ -665,5 +670,191 @@ var StatsUI = (() => {
     });
   }
   var ShotQuality = { render: render15 };
+
+  // src/components/matchStats.js
+  function render16(containerId, data, options = {}) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+    const wrap = document.createElement("div");
+    wrap.className = "stats-match-stats";
+    if (options.teamA || options.teamB || options.scoreA != null) {
+      const score = options.scoreA != null && options.scoreB != null ? `${options.scoreA} : ${options.scoreB}` : "";
+      const header = document.createElement("div");
+      header.className = "stats-match-stats-header";
+      header.innerHTML = `
+      <div class="stats-match-stats-team stats-match-stats-team--home">${options.teamA || ""}</div>
+      <div class="stats-match-stats-score">${score}</div>
+      <div class="stats-match-stats-team stats-match-stats-team--away">${options.teamB || ""}</div>
+    `;
+      wrap.appendChild(header);
+    }
+    data.forEach(({ label, a, b }) => {
+      const total = a + b || 1;
+      const aPct = a / total * 50;
+      const bPct = b / total * 50;
+      const row = document.createElement("div");
+      row.className = "stats-match-stats-row";
+      row.innerHTML = `
+      <div class="stats-match-stats-val">${a}</div>
+      <div class="stats-match-stats-mid">
+        <div class="stats-match-stats-label">${label}</div>
+        <div class="stats-match-stats-bar">
+          <div class="stats-match-stats-bar-a" style="width:${aPct}%"></div>
+          <div class="stats-match-stats-bar-b" style="width:${bPct}%"></div>
+        </div>
+      </div>
+      <div class="stats-match-stats-val">${b}</div>
+    `;
+      wrap.appendChild(row);
+    });
+    container.appendChild(wrap);
+  }
+  var MatchStats = { render: render16 };
+
+  // src/components/seasonTrend.js
+  function render17(svgSelector, data, options = {}) {
+    const mg = { top: 20, right: 50, bottom: 44, left: 40, ...options.margin };
+    const totalW = options.width || 720;
+    const totalH = options.height || 280;
+    const W = totalW - mg.left - mg.right;
+    const H = totalH - mg.top - mg.bottom;
+    const svg = d3.select(svgSelector);
+    svg.html("").attr("width", totalW).attr("height", totalH);
+    const g = svg.append("g").attr("transform", `translate(${mg.left},${mg.top})`);
+    const weeks = data.map((d, i) => d.week ?? i + 1);
+    const keys = ["gf", "ga", "xgf", "xga"].filter((k) => data.some((d) => d[k] != null));
+    const maxVal = d3.max(data, (d) => Math.max(...keys.map((k) => d[k] ?? 0))) || 1;
+    const x = d3.scalePoint().domain(weeks).range([0, W]).padding(0.4);
+    const y = d3.scaleLinear().domain([0, maxVal * 1.15]).range([H, 0]).nice();
+    y.ticks(4).forEach((t) => g.append("line").attr("x1", 0).attr("y1", y(t)).attr("x2", W).attr("y2", y(t)).attr("class", "stats-season-trend-grid"));
+    g.append("g").attr("transform", `translate(0,${H})`).call(d3.axisBottom(x).tickFormat((d) => `W${d}`)).attr("class", "stats-season-trend-axis");
+    g.append("g").call(d3.axisLeft(y).ticks(4)).attr("class", "stats-season-trend-axis");
+    const series = [
+      { key: "gf", cls: "gf", label: options.gfLabel || "GF", dashed: false },
+      { key: "ga", cls: "ga", label: options.gaLabel || "GA", dashed: false },
+      { key: "xgf", cls: "xgf", label: options.xgfLabel || "xGF", dashed: true },
+      { key: "xga", cls: "xga", label: options.xgaLabel || "xGA", dashed: true }
+    ].filter(({ key }) => keys.includes(key));
+    const lineGen = (key) => d3.line().x((d, i) => x(d.week ?? i + 1)).y((d) => y(d[key] ?? 0)).curve(d3.curveMonotoneX);
+    series.forEach(({ key, cls, dashed }) => {
+      g.append("path").datum(data).attr("d", lineGen(key)).attr("class", `stats-season-trend-line stats-season-trend-line--${cls}`).attr("stroke-dasharray", dashed ? "5 3" : null);
+      if (!dashed) {
+        g.selectAll(null).data(data).enter().append("circle").attr("cx", (d, i) => x(d.week ?? i + 1)).attr("cy", (d) => y(d[key] ?? 0)).attr("r", 3).attr("class", `stats-season-trend-dot stats-season-trend-dot--${cls}`);
+      }
+    });
+    const lg = svg.append("g").attr("transform", `translate(${mg.left},${totalH - 6})`);
+    series.forEach(({ cls, label, dashed }, i) => {
+      const off = i * 72;
+      lg.append("line").attr("x1", off).attr("y1", 0).attr("x2", off + 14).attr("y2", 0).attr("class", `stats-season-trend-line stats-season-trend-line--${cls}`).attr("stroke-width", 2).attr("stroke-dasharray", dashed ? "5 3" : null);
+      lg.append("text").attr("x", off + 18).attr("y", 4).attr("class", "stats-season-trend-legend").text(label);
+    });
+  }
+  var SeasonTrend = { render: render17 };
+
+  // src/components/passRose.js
+  function render18(svgSelector, sectors, options = {}) {
+    const size = options.size || 300;
+    const rings = options.rings || 4;
+    const cx = size / 2;
+    const cy = size / 2;
+    const outerR = size / 2 - 28;
+    const N = sectors.length;
+    const arc = 2 * Math.PI / N;
+    const svg = d3.select(svgSelector);
+    svg.html("").attr("width", size).attr("height", size);
+    for (let r = 1; r <= rings; r++) {
+      svg.append("circle").attr("cx", cx).attr("cy", cy).attr("r", outerR / rings * r).attr("class", "stats-pass-rose-ring");
+    }
+    sectors.forEach((_, i) => {
+      const a = arc * i - Math.PI / 2;
+      svg.append("line").attr("x1", cx).attr("y1", cy).attr("x2", cx + outerR * Math.cos(a)).attr("y2", cy + outerR * Math.sin(a)).attr("class", "stats-pass-rose-spoke");
+    });
+    const maxCount = d3.max(sectors, (d) => d.count) || 1;
+    const arcGen = d3.arc().innerRadius(0).startAngle((_, i) => arc * i - arc / 2 - Math.PI / 2).endAngle((_, i) => arc * i + arc / 2 - Math.PI / 2).outerRadius((d) => d.count / maxCount * outerR);
+    svg.selectAll(".stats-pass-rose-sector").data(sectors).enter().append("path").attr("transform", `translate(${cx},${cy})`).attr("d", arcGen).attr("class", "stats-pass-rose-sector").attr("fill", (d) => {
+      const acc = d.accuracy ?? 0.75;
+      return acc >= 0.8 ? "#000" : acc >= 0.65 ? "#555" : "#9ca3af";
+    });
+    const labelR = outerR + 14;
+    sectors.forEach((d, i) => {
+      const a = arc * i - Math.PI / 2;
+      svg.append("text").attr("x", cx + labelR * Math.cos(a)).attr("y", cy + labelR * Math.sin(a)).attr("class", "stats-pass-rose-label").text(d.label || "");
+    });
+    const total = d3.sum(sectors, (d) => d.count);
+    svg.append("text").attr("x", cx).attr("y", cy - 7).attr("class", "stats-pass-rose-center-val").text(total);
+    svg.append("text").attr("x", cx).attr("y", cy + 9).attr("class", "stats-pass-rose-center-lbl").text("passes");
+  }
+  var PassRose = { render: render18 };
+
+  // src/components/duelsMap.js
+  function render19(svgSelector, duels, options = {}) {
+    const mg = { top: 12, right: 16, bottom: 48, left: 16, ...options.margin };
+    const totalW = options.width || 700;
+    const totalH = options.height || 440;
+    const W = totalW - mg.left - mg.right;
+    const H = totalH - mg.top - mg.bottom;
+    const svg = d3.select(svgSelector);
+    svg.html("").attr("width", totalW).attr("height", totalH);
+    const g = svg.append("g").attr("transform", `translate(${mg.left},${mg.top})`);
+    drawPitch(g, W, H, "stats-pitchmap");
+    const px = (v) => v / 100 * W;
+    const py = (v) => v / 100 * H;
+    duels.forEach((d) => {
+      const cls = `stats-duels-map-${d.won ? "won" : "lost"}-${d.type || "ground"}`;
+      const r = d.type === "aerial" ? 6 : 5;
+      g.append("circle").attr("cx", px(d.x)).attr("cy", py(d.y)).attr("r", r).attr("class", cls);
+    });
+    const lg = svg.append("g").attr("transform", `translate(${mg.left},${mg.top + H + 10})`);
+    [
+      { label: "Ground won", filled: true, color: "#000", stroke: "#000" },
+      { label: "Aerial won", filled: true, color: "#000", stroke: "#000" },
+      { label: "Ground lost", filled: false, color: "none", stroke: "#9ca3af" },
+      { label: "Aerial lost", filled: false, color: "none", stroke: "#e11d48" }
+    ].forEach(({ label, filled, color, stroke }, i) => {
+      const off = i * 120;
+      lg.append("circle").attr("cx", off + 6).attr("cy", 8).attr("r", 5).attr("fill", filled ? color : "none").attr("stroke", stroke).attr("stroke-width", 1.5);
+      lg.append("text").attr("x", off + 16).attr("y", 12).attr("class", "stats-duels-map-legend").text(label);
+    });
+  }
+  var DuelsMap = { render: render19 };
+
+  // src/components/setPiece.js
+  function render20(svgSelector, deliveries, options = {}) {
+    const mg = { top: 12, right: 16, bottom: 48, left: 16, ...options.margin };
+    const totalW = options.width || 700;
+    const totalH = options.height || 440;
+    const W = totalW - mg.left - mg.right;
+    const H = totalH - mg.top - mg.bottom;
+    const svg = d3.select(svgSelector);
+    svg.html("").attr("width", totalW).attr("height", totalH);
+    const g = svg.append("g").attr("transform", `translate(${mg.left},${mg.top})`);
+    drawPitch(g, W, H, "stats-pitchmap");
+    const px = (v) => v / 100 * W;
+    const py = (v) => v / 100 * H;
+    deliveries.forEach((d) => {
+      const outcome = d.outcome || "cleared";
+      const x1 = px(d.fromX), y1 = py(d.fromY);
+      const x2 = px(d.toX), y2 = py(d.toY);
+      const mx = (x1 + x2) / 2;
+      const my = Math.min(y1, y2) - 35;
+      g.append("path").attr("d", `M ${x1},${y1} Q ${mx},${my} ${x2},${y2}`).attr("class", `stats-set-piece-arc stats-set-piece-arc--${outcome}`);
+      const r = 4;
+      g.append("line").attr("x1", x1 - r).attr("y1", y1 - r).attr("x2", x1 + r).attr("y2", y1 + r).attr("class", "stats-set-piece-from");
+      g.append("line").attr("x1", x1 + r).attr("y1", y1 - r).attr("x2", x1 - r).attr("y2", y1 + r).attr("class", "stats-set-piece-from");
+      g.append("circle").attr("cx", x2).attr("cy", y2).attr("r", 5).attr("class", `stats-set-piece-to stats-set-piece-to--${outcome}`);
+    });
+    const lg = svg.append("g").attr("transform", `translate(${mg.left},${mg.top + H + 10})`);
+    [
+      { outcome: "goal", color: "#000", label: "Goal", filled: true, dashed: false },
+      { outcome: "chance", color: "#9ca3af", label: "Chance", filled: true, dashed: false },
+      { outcome: "cleared", color: "#ddd", label: "Cleared", filled: false, dashed: true }
+    ].forEach(({ color, label, filled, dashed }, i) => {
+      const off = i * 110;
+      lg.append("line").attr("x1", off).attr("y1", 8).attr("x2", off + 14).attr("y2", 8).attr("stroke", color).attr("stroke-width", 1.5).attr("stroke-dasharray", dashed ? "3 2" : null);
+      lg.append("circle").attr("cx", off + 7).attr("cy", 8).attr("r", 4).attr("fill", filled ? color : "none").attr("stroke", color).attr("stroke-width", 1);
+      lg.append("text").attr("x", off + 20).attr("y", 12).attr("class", "stats-set-piece-legend").text(label);
+    });
+  }
+  var SetPiece = { render: render20 };
   return __toCommonJS(src_exports);
 })();

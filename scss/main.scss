@@ -29,6 +29,11 @@
 @use 'player-card';
 @use 'stat-row';
 @use 'section';
+@use 'match-stats';
+@use 'season-trend';
+@use 'pass-rose';
+@use 'duels-map';
+@use 'set-piece';
 
 // ─── Base ─────────────────────────────────────────────────────────────────────
 *, *::before, *::after { box-sizing: border-box; }

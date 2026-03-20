@@ -1,0 +1,36 @@
+@use 'variables' as *;
+
+.stats-season-trend {
+  &-grid {
+    stroke: $color-border-solid;
+    stroke-width: 1;
+  }
+
+  &-axis {
+    .domain     { stroke: $color-border-solid; }
+    .tick line  { stroke: $color-border-solid; }
+    .tick text  { fill: $color-muted; font-size: $font-size-xs; font-family: inherit; }
+  }
+
+  &-line {
+    stroke-width: 2;
+    fill: none;
+
+    &--gf  { stroke: $color-black; }
+    &--ga  { stroke: $color-loss; }
+    &--xgf { stroke: $color-black; opacity: .4; }
+    &--xga { stroke: $color-loss;  opacity: .4; }
+  }
+
+  &-dot {
+    &--gf  { fill: $color-black; }
+    &--ga  { fill: $color-loss; }
+  }
+
+  &-legend {
+    font-size: $font-size-xs;
+    fill: $color-muted;
+    font-family: inherit;
+    dominant-baseline: central;
+  }
+}
