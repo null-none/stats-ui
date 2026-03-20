@@ -5,6 +5,7 @@
   display: grid;
   grid-template-columns: repeat(3, $pitch-cell-width);
   grid-template-rows: repeat(4, $pitch-cell-height);
+  grid-auto-rows: $pitch-cell-height;
   gap: 2px;
   background: $color-bg;
   width: fit-content;
