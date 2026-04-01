@@ -1,0 +1,120 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ─── Overlay ──────────────────────────────────────────────────────────────────
+.stats-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+
+  &.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+// ─── Dialog ───────────────────────────────────────────────────────────────────
+.stats-modal {
+  background: $color-bg;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+  width: 100%;
+  max-width: 480px;
+  margin: $space-6;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  transform: translateY(8px);
+  transition: transform 0.18s ease;
+
+  .stats-modal-overlay.is-open & {
+    transform: translateY(0);
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-4 $space-5;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &-title {
+    @include label-upper($font-size-base, $tracking-lg, $color-text);
+  }
+
+  &-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: $color-text-muted;
+    font-size: $font-size-lg;
+    line-height: 1;
+    padding: 0;
+    border-radius: $border-radius-sm;
+    transition: color 0.12s, background 0.12s;
+
+    &:hover {
+      color: $color-text;
+      background: $color-bg-alt;
+    }
+  }
+
+  &-body {
+    padding: $space-5;
+    font-size: $font-size-base;
+    line-height: 1.6;
+    color: $color-text-secondary;
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: $space-2;
+    padding: $space-4 $space-5;
+    border-top: 1px solid $color-border;
+  }
+}
+
+// ─── Buttons ──────────────────────────────────────────────────────────────────
+.stats-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-4;
+  border-radius: $border-radius-md;
+  border: 1px solid $color-border-solid;
+  background: $color-bg;
+  font-family: inherit;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: $tracking-sm;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+
+  &:hover {
+    background: $color-bg-alt;
+  }
+
+  &--primary {
+    background: $color-accent;
+    border-color: $color-accent;
+    color: $color-white;
+
+    &:hover {
+      background: #001a38;
+      border-color: #001a38;
+    }
+  }
+}

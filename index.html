@@ -18,7 +18,7 @@
     <aside class="docs-sidebar">
       <div class="docs-sidebar-brand">
         <h2>Stats UI</h2>
-        <p>v1.0.2 · Components</p>
+        <p>v1.1.0 · Components</p>
       </div>
 
       <div class="docs-sidebar-nav-wrap">
@@ -26,6 +26,7 @@
         <ul class="docs-nav">
           <li><a href="#header">Header</a></li>
           <li><a href="#card">Card</a></li>
+          <li><a href="#modal">Modal</a></li>
         </ul>
 
         <div class="docs-sidebar-section">Data</div>
@@ -120,6 +121,33 @@
               <span class="stats-card-meta">0–90</span>
             </div>
             <div class="stats-card-body">Card content here...</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Modal ─────────────────────────────────────────────── -->
+      <section id="modal" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Modal</h2>
+          <p>Overlay dialog for confirmations, detail views, and contextual actions. Toggle <code>.is-open</code> on the overlay to show/hide.</p>
+        </div>
+        <span class="docs-tag">.stats-modal-overlay · .stats-modal · .stats-btn</span>
+        <div class="docs-preview" style="position:relative; min-height:260px;">
+          <!-- Inline (non-fixed) overlay for preview purposes -->
+          <div class="stats-modal-overlay is-open" style="position:absolute; border-radius:8px;">
+            <div class="stats-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-demo">
+              <div class="stats-modal-header">
+                <span class="stats-modal-title" id="modal-title-demo">Player details</span>
+                <button class="stats-modal-close" aria-label="Close">✕</button>
+              </div>
+              <div class="stats-modal-body">
+                Detailed stats and match history for the selected player will appear here.
+              </div>
+              <div class="stats-modal-footer">
+                <button class="stats-btn">Cancel</button>
+                <button class="stats-btn stats-btn--primary">Confirm</button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
