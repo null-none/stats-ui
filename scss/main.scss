@@ -35,6 +35,7 @@
 @use 'duels-map';
 @use 'set-piece';
 @use 'modal';
+@use 'alpha-list';
 
 // ─── Base ─────────────────────────────────────────────────────────────────────
 *, *::before, *::after { box-sizing: border-box; }

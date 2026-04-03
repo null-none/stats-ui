@@ -24,3 +24,4 @@ export { SeasonTrend }  from './components/seasonTrend.js';
 export { PassRose }     from './components/passRose.js';
 export { DuelsMap }     from './components/duelsMap.js';
 export { SetPiece }     from './components/setPiece.js';
+export { AlphaList }    from './components/alphaList.js';

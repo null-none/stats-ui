@@ -55,6 +55,7 @@
           <li><a href="#pass-rose">Pass rose</a></li>
           <li><a href="#duels-map">Duels map</a></li>
           <li><a href="#set-piece">Set piece</a></li>
+          <li><a href="#alphalist">Alpha list</a></li>
         </ul>
 
         <div class="docs-sidebar-section">Visualizations</div>
@@ -958,6 +959,18 @@
         </div>
       </section>
 
+      <!-- ── Alpha list ─────────────────────────────────────────────── -->
+      <section id="alphalist" class="docs-section">
+        <div class="docs-section-header">
+          <h2>Alpha list</h2>
+          <p>Alphabetically grouped card index with a letter-jump navigation bar. Useful for player directories, squad lists, and any A–Z catalogue.</p>
+        </div>
+        <span class="docs-tag">AlphaList.render(id, items, options)</span>
+        <div class="docs-preview">
+          <div id="alphalist-demo"></div>
+        </div>
+      </section>
+
     </main>
 
     <!-- ── Scripts ────────────────────────────────────────────────── -->
@@ -970,6 +983,7 @@
         Pitchmap, Arrowmap, XgChart, Scatter,
         Formation, Momentum, Heatmap, EventLog, ShotQuality,
         MatchStats, SeasonTrend, PassRose, DuelsMap, SetPiece,
+        AlphaList,
       } = StatsUI;
 
       // Bars
@@ -1247,6 +1261,37 @@ Possession,58,42`);
         { fromX: 68,  fromY: 88, toX: 82, toY: 58, type: "freekick", outcome: "chance"  },
         { fromX: 65,  fromY: 50, toX: 88, toY: 48, type: "freekick", outcome: "cleared" },
       ], { width: 700, height: 440 });
+
+      // AlphaList
+      AlphaList.render("alphalist-demo", [
+        { name: "Alisson",         subtitle: "Goalkeeper · Brazil",   meta: "#1"  },
+        { name: "Alexander-Arnold", subtitle: "Defender · England",   meta: "#66" },
+        { name: "Bellingham",      subtitle: "Midfielder · England",  meta: "#5"  },
+        { name: "Carvajal",        subtitle: "Defender · Spain",      meta: "#2"  },
+        { name: "De Bruyne",       subtitle: "Midfielder · Belgium",  meta: "#17" },
+        { name: "Diaz",            subtitle: "Forward · Colombia",    meta: "#7"  },
+        { name: "Ederson",         subtitle: "Goalkeeper · Brazil",   meta: "#31" },
+        { name: "Fernández",       subtitle: "Midfielder · Argentina",meta: "#8"  },
+        { name: "Foden",           subtitle: "Midfielder · England",  meta: "#47" },
+        { name: "Gvardiol",        subtitle: "Defender · Croatia",    meta: "#24" },
+        { name: "Haaland",         subtitle: "Forward · Norway",      meta: "#9"  },
+        { name: "Henderson",       subtitle: "Midfielder · England",  meta: "#14" },
+        { name: "Jota",            subtitle: "Forward · Portugal",    meta: "#20" },
+        { name: "Kane",            subtitle: "Forward · England",     meta: "#9"  },
+        { name: "Kovačić",         subtitle: "Midfielder · Croatia",  meta: "#8"  },
+        { name: "Lukaku",          subtitle: "Forward · Belgium",     meta: "#9"  },
+        { name: "Maguire",         subtitle: "Defender · England",    meta: "#5"  },
+        { name: "Modrić",          subtitle: "Midfielder · Croatia",  meta: "#10" },
+        { name: "Núñez",           subtitle: "Forward · Uruguay",     meta: "#11" },
+        { name: "Odegaard",        subtitle: "Midfielder · Norway",   meta: "#8"  },
+        { name: "Rüdiger",         subtitle: "Defender · Germany",    meta: "#2"  },
+        { name: "Salah",           subtitle: "Forward · Egypt",       meta: "#11" },
+        { name: "Silva",           subtitle: "Defender · Brazil",     meta: "#6"  },
+        { name: "Trent",           subtitle: "Defender · England",    meta: "#66" },
+        { name: "Van Dijk",        subtitle: "Defender · Netherlands",meta: "#4"  },
+        { name: "Walker",          subtitle: "Defender · England",    meta: "#2"  },
+        { name: "Zinchenko",       subtitle: "Defender · Ukraine",    meta: "#35" },
+      ]);
 
       // Active nav highlight on scroll
       const sections = document.querySelectorAll(".docs-section");

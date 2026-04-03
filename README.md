@@ -47,6 +47,8 @@ Output goes to `dist/`. D3.js v7 is loaded separately from CDN.
 | `Score` | `.stats-score` | Match score widget with team names and result badge |
 | `Section` | `.stats-section` | Report section header with title and subtitle |
 | `Divider` | `.stats-divider` | Horizontal rule with optional label |
+| `Modal` | `.stats-modal-overlay` + `.stats-modal` | Overlay dialog with header, body, footer, and close button. Toggle with `.is-open` |
+| `Button` | `.stats-btn` | Base button; variants: `--primary` |
 
 ### Data
 | Component | Class / Usage | Description |
@@ -55,6 +57,7 @@ Output goes to `dist/`. D3.js v7 is loaded separately from CDN.
 | `Form` | `.stats-form` | Recent results strip (W / D / L) |
 | `Metric` | `.stats-metric` | Horizontal progress bar for a single metric |
 | `EventLog` | `EventLog.render(id, events, opts)` | Chronological match events with icons |
+| `AlphaList` | `AlphaList.render(id, items, opts)` | Alphabetically grouped card index with A–Z jump navigation |
 | `Stat Row` | `.stats-stat-row` | Label + value row with optional progress underline (`--bar`) |
 
 ### Badges & Players
@@ -143,6 +146,17 @@ SetPiece.render("#sel", [
 // outcome: "goal" | "chance" | "cleared"
 ```
 
+#### AlphaList data format
+```js
+AlphaList.render("container-id", [
+  { name: "Salah",    subtitle: "Forward · Egypt",   meta: "#11" },
+  { name: "Van Dijk", subtitle: "Defender · Netherlands", meta: "#4" },
+  { name: "Alisson",  subtitle: "Goalkeeper · Brazil" },
+], { activeOnly: true });
+// activeOnly (default true) — show only letters that have entries in the nav bar
+// href field is optional — wraps the row in <a href="...">
+```
+
 ## Grid — tiny-grid
 
 `dist/tiny-grid.min.css` ships a 12-column responsive grid. Breakpoints: `sm` 600 px · `md` 900 px · `lg` 1200 px · `xl` 1800 px.
@@ -171,6 +185,7 @@ src/
     passRose.js      Passing direction rose
     duelsMap.js      Duels map on pitch
     setPiece.js      Set piece delivery zones
+    alphaList.js     Alphabetical card index
     ...              (all other components)
   index.js           Exports all components
 scss/
@@ -181,6 +196,8 @@ scss/
   _pass-rose.scss    Passing direction rose
   _duels-map.scss    Duels map
   _set-piece.scss    Set piece zones
+  _modal.scss        Modal overlay and button
+  _alpha-list.scss   Alphabetical card index
   _*.scss            One partial per component
   main.scss          Entry point
 dist/

@@ -1,0 +1,117 @@
+@use 'variables' as *;
+
+.stats-alphalist {
+  width: 100%;
+  max-width: 640px;
+
+  // ── Letter nav ─────────────────────────────────────────────────────────────
+  &-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-1;
+    padding-bottom: $space-4;
+    border-bottom: 1px solid $color-border-light;
+    margin-bottom: $space-4;
+  }
+
+  &-nav-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1px solid $color-border-solid;
+    border-radius: $border-radius-sm;
+    background: none;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-accent;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+
+    &:hover {
+      background: $color-accent;
+      color: $color-white;
+      border-color: $color-accent;
+    }
+
+    &--empty {
+      color: $color-muted;
+      border-color: $color-border-light;
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+
+  // ── Body ───────────────────────────────────────────────────────────────────
+  &-body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-6;
+  }
+
+  // ── Group ──────────────────────────────────────────────────────────────────
+  &-group-label {
+    font-size: $font-size-md;
+    font-weight: $font-weight-bold;
+    color: $color-accent;
+    letter-spacing: $tracking-sm;
+    text-transform: uppercase;
+    padding-bottom: $space-2;
+    border-bottom: 2px solid $color-accent;
+    margin-bottom: $space-2;
+  }
+
+  // ── Item ───────────────────────────────────────────────────────────────────
+  &-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-2 $space-3;
+    border-bottom: 1px solid $color-border-light;
+    gap: $space-3;
+    text-decoration: none;
+    color: inherit;
+
+    &:last-child { border-bottom: none; }
+
+    &--link {
+      cursor: pointer;
+      transition: background 0.12s;
+
+      &:hover {
+        background: $color-bg-alt;
+      }
+    }
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    &-name {
+      font-size: $font-size-base;
+      font-weight: $font-weight-medium;
+      color: $color-text;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &-sub {
+      font-size: $font-size-sm;
+      color: $color-text-muted;
+    }
+
+    &-meta {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+      color: $color-muted;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+  }
+}
